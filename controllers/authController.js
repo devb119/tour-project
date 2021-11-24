@@ -49,7 +49,6 @@ exports.signup = catchAsync(async (req, res, next) => {
   const newUser = await User.create(req.body);
 
   const url = `${req.protocol}://${req.get('host')}/me`;
-  console.log(url);
   await new Email(newUser, url).sendWelcome();
 
   createSendToken(newUser, 201, res);
@@ -153,7 +152,6 @@ exports.isLoggedIn = async (req, res, next) => {
 exports.restrictTo = (...roles) => {
   return (req, res, next) => {
     // roles ['admin', 'lead-guide'] || roles ['user']
-    console.log(req.user.role, roles);
     if (!roles.includes(req.user.role))
       return next(
         new AppError('You do not have permission to perform this action', 403)
