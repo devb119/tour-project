@@ -10,7 +10,7 @@ router.use(viewsController.alert);
 
 router.get(
   '/',
-  // bookingController.createBookingCheckout,
+  bookingController.createBookingCheckout,
   authController.isLoggedIn,
   viewsController.getOverview
 );
@@ -23,9 +23,10 @@ router.get('/me', authController.protect, viewsController.getAccount);
 
 router.get('/my-tours', authController.protect, viewsController.getMyTours);
 
-router.post(
-  '/submit-user-data',
-  authController.protect,
-  viewsController.updateUserData
-);
+// Old way to update via form
+// router.post(
+//   '/submit-user-data',
+//   authController.protect,
+//   viewsController.updateUserData
+// );
 module.exports = router;

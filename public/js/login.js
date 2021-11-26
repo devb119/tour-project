@@ -29,10 +29,10 @@ export const logout = async () => {
       url: '/api/v1/users/logout',
     });
     if (res.data.status === 'success')
-      // window.setTimeout(() => {
-      //   location.assign('/');
-      // }, 250);
-      location.reload(true);
+      window.setTimeout(() => {
+        location.assign('/');
+      }, 250);
+    // location.reload(true);
   } catch (err) {
     showAlert('error', 'Error logging out! Try again.');
   }
