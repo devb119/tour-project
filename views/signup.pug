@@ -1,0 +1,22 @@
+extends base
+
+block content
+  main.main
+    #signup.login-form
+      h1.heading-secondary.ma-bt-lg Create New Account
+      form.form.form--login
+        .form__group
+          label.form__label  Name
+          input#name(name='name' class='form__input' placeholder='Enter Name')
+        .form__group
+          label.form__label Email
+          input#email(name='email' class='form__input' placeholder='Enter Email')
+        .form__group.ma-bt-md
+          label.form__label Password
+          input#password(type='password' class='form__input' placeholder='Create Password')
+        .form__group
+          label.form__label Confirm Password
+          input#passwordConfirm(type='password' class='form__input' placeholder='Confirm Password')
+        button.btn.btn--green Register
+      p.haveaccount Have An Account? 
+        a(href='/login') Login
