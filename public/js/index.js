@@ -14,6 +14,14 @@ const logOutBtn = document.querySelector('.nav__el--logout');
 const userDataForm = document.querySelector('.form-user-data');
 const userPasswordForm = document.querySelector('.form-user-password');
 const bookBtn = document.getElementById('book-tour');
+
+const cardContainer = document.querySelector('.card-container');
+
+const overlay = document.querySelector('.overlay');
+const editTourForm = document.querySelector('.tour-form');
+const closeBtn = document.querySelector('.btn-close');
+
+const reviewForm = document.querySelector('.reviews_box');
 // VALUES
 
 if (mapBox) {
@@ -78,6 +86,62 @@ if (bookBtn) {
     await bookTour(tourId);
     bookBtn.textContent = 'BOOK TOUR NOW!';
     bookBtn.style.backgroundColor = '#55c57a';
+  });
+}
+
+if (cardContainer) {
+  cardContainer.addEventListener('click', (e) => {
+    const reviewBtn = e.target.closest('.review');
+    const editTourBtn = e.target.closest('.edit-tour');
+    if (reviewBtn) {
+      const [name, imageCover] = reviewBtn.dataset.tour.split(',');
+      console.log(name, imageCover);
+      reviewForm.querySelector(
+        '.card__picture-img'
+      ).src = `/img/tours/${imageCover}`;
+      reviewForm.querySelector('span').textContent = name;
+      reviewForm.classList.remove('hidden');
+      overlay.classList.remove('hidden');
+    }
+    if (editTourBtn) {
+      const tour = JSON.parse(editTourBtn.dataset.tour);
+      console.log(tour);
+      editTourForm.querySelector('#tourName').value = tour.name;
+      editTourForm.querySelector('#duration').value = tour.duration;
+      editTourForm.querySelector('#maxGroupSize').value = tour.maxGroupSize;
+      editTourForm.querySelector('#difficulty').value = tour.difficulty;
+      editTourForm.querySelector('#ratingsAverage').value = tour.ratingsAverage;
+      editTourForm.querySelector('#ratingsQuantity').value =
+        tour.ratingsQuantity;
+      editTourForm.querySelector('#price').value = tour.price;
+      editTourForm.querySelector('#priceDiscount').value = tour.priceDiscount;
+      editTourForm.querySelector('#summary').value = tour.summary;
+      editTourForm.querySelector('#description').value = tour.description;
+      editTourForm.querySelector(
+        '#startCoordinate'
+      ).value = `${tour.startLocation.coordinates[0]}, ${tour.startLocation.coordinates[1]}`;
+      editTourForm.querySelector('#startAddress').value =
+        tour.startLocation.address;
+      editTourForm.querySelector('#startDescription').value =
+        tour.startLocation.description;
+      overlay.classList.remove('hidden');
+      editTourForm.classList.remove('hidden');
+    }
+  });
+}
+
+if (overlay) {
+  overlay.addEventListener('click', () => {
+    overlay.classList.add('hidden');
+    editTourForm.classList.add('hidden');
+    reviewForm.classList.add('hidden');
+  });
+}
+
+if (closeBtn) {
+  closeBtn.addEventListener('click', () => {
+    overlay.classList.add('hidden');
+    editTourForm.classList.add('hidden');
   });
 }
 

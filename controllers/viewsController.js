@@ -81,6 +81,7 @@ exports.getMyTours = catchAsync(async (req, res, next) => {
   res.status(200).render('overview', {
     title: 'My Tours',
     tours,
+    review: true,
   });
 });
 
@@ -96,5 +97,24 @@ exports.updateUserData = catchAsync(async (req, res, next) => {
   res.status(200).render('account', {
     title: 'Your account',
     user: updatedUser,
+  });
+});
+
+exports.getUser = catchAsync(async (req, res, next) => {
+  const users = await User.find({ role: { $ne: 'admin' } });
+
+  res.status(200).render('user-management', {
+    title: 'User Management',
+    users,
+  });
+});
+
+exports.updateTour = catchAsync(async (req, res, next) => {
+  const tours = await Tour.find();
+
+  res.status(200).render('overview', {
+    title: 'Tour Management',
+    tours,
+    update: true,
   });
 });

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Reviews</title>
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.6.3/css/all.css"
+    />
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <div class="main">
+      <div id="overlay" class="overlay"></div>
+      <div class="reviews_box">
+        <div class="card">
+          <div class="card__header">
+            <div class="card__picture">
+              <img
+                class="card__picture-img"
+                src="https://wallpaperaccess.com/full/2963445.jpg"
+              />
+            </div>
+            <h3 class="heading-tertirary">
+              <span>TourName</span>
+            </h3>
+          </div>
+          <div class="card__details" style="display: block">
+            <div class="reviews__avatar">
+              <img
+                class="reviews__avatar-img"
+                src="img/users/user-14.jpg"
+                alt="`${review.user.name}`"
+              />
+              <h6 class="reviews__user">Laura Wilson</h6>
+            </div>
+
+            <div class="reviews__rating">
+              <input type="radio" name="rate" id="rating-5" value="5" />
+              <label class="far fa-star" for="rating-5"></label>
+              <input type="radio" name="rate" id="rating-4" value="4" />
+              <label class="far fa-star" for="rating-4"></label>
+              <input type="radio" name="rate" id="rating-3" value="3" />
+              <label class="far fa-star" for="rating-3"></label>
+              <input type="radio" name="rate" id="rating-2" value="2" />
+              <label class="far fa-star" for="rating-2"></label>
+              <input type="radio" name="rate" id="rating-1" value="1" />
+              <label class="far fa-star" for="rating-1"></label>
+              <div class="breakline"></div>
+              <header></header>
+            </div>
+
+            <div class="text_box">
+              <textarea
+                class="form__input"
+                id="reviews_text"
+                cols="30"
+                rows="6"
+                placeholder="Write you review here..."
+              ></textarea>
+            </div>
+          </div>
+          <div class="card__footer">
+            <button class="btn btn--grey btn--small">Discard</button>
+            <button class="btn btn--green btn--small">Save</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

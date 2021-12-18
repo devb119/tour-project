@@ -1,0 +1,64 @@
+extends base
+
+mixin navItem(link, text, icon, active)
+  li(class=`${active ? 'side-nav--active' : ''}`)
+    a(href=`${link}`)
+      svg
+        use(xlink:href=`img/icons.svg#icon-${icon}`)
+      | #{text}
+
+block content 
+  main.main
+    .user-view
+      nav.user-view__menu
+        ul.side-nav
+          +navItem('/me', 'Settings', 'settings', false)
+          +navItem('/my-tours', 'My bookings', 'briefcase', false)
+          +navItem('#', 'My reviews', 'star', false)
+          +navItem('#', 'Billing', 'credit-card', false)
+        - if(user.role === 'admin')
+          .admin-nav
+            h5.admin-nav__heading Admin
+            ul.side-nav
+              +navItem('/tour-mng', 'Manage tours', 'map', false)
+              +navItem('/user', 'Manage users', 'users', true)
+              +navItem('#', 'Manage reviews', 'star', false)
+              +navItem('#', 'Manage bookings', 'briefcase', false)
+
+      .user-view__content
+        .management__form
+          .table-header
+            h2.heading-secondary User Management 
+            a#addNewUser.btn.btn--green(href='#')
+              span.form__sublabel
+                i.fas.fa-user-plus
+                |  Add New User
+          #user-management.user-management
+            table.table
+              thead
+                tr
+                  th.table__label ID
+                  th.table__label Name
+                  th.table__label Email
+                  th.table__label Role
+                  th.table__label Status
+                  th.table__label Actions
+              tbody
+                -let i=0
+                each user in users 
+                  -i++
+                  tr
+                    td= `${i}`
+                    td
+                      img(src=`/img/users/${user.photo}`)
+                      span.user-name= user.name
+                    td= user.email
+                    td= user.role
+                    td
+                      span.status.text-success &bull;
+                      |  Active
+                    td
+                      button.mg-right-sm
+                        i.fas.fa-user-edit
+                      button
+                        i.fas.fa-user-minus

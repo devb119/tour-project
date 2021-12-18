@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tour Management</title>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <div class="main">
+      <div class="management__form tour-form">
+        <h1 class="heading-secondary ma-bt-lg">
+          <i class="fa fa-pencil-square-o"></i> Tour Management
+        </h1>
+
+        <form class="form form-container">
+          <div class="form__group2">
+            <label for="tourName" class="form__label">Tour Name</label>
+            <input
+              type="text"
+              id="tourName"
+              class="form__input"
+              placeholder="Enter Name"
+              value=""
+            />
+          </div>
+          <div class="form__group2">
+            <label for="duration" class="form__label">Duration</label>
+            <input
+              type="number"
+              id="duration"
+              name="duration"
+              class="form__input"
+              placeholder="Enter duration"
+              value=""
+            />
+          </div>
+          <div class="form__group2">
+            <label for="maxGroupSize" class="form__label">Group Size</label>
+            <input
+              type="number"
+              id="maxGroupSize"
+              name="maxGroupSize"
+              class="form__input"
+              placeholder="Enter Group Size"
+              value=""
+            />
+          </div>
+          <div class="form__group2">
+            <label for="difficulty" class="form__label">Difficulty</label>
+            <select id="difficulty" class="form__input">
+              <option value="easy">Easy</option>
+              <option value="medium">Medium</option>
+              <option value="difficult">Difficult</option>
+            </select>
+          </div>
+
+          <div class="form__group2">
+            <label for="ratetingsAverage" class="form__label"
+              >Ratetings Average</label
+            >
+            <input
+              type="number"
+              id="ratetingsAverage"
+              name="ratetingsAverage"
+              class="form__input"
+              placeholder="4.5"
+              value=""
+            />
+          </div>
+          <div class="form__group2">
+            <label for="ratingsQuantity" class="form__label"
+              >Ratings Quantity</label
+            >
+            <input
+              type="number"
+              id="ratingsQuantity"
+              name="ratingsQuantity"
+              class="form__input"
+              placeholder=""
+              value=""
+            />
+          </div>
+          <div class="form__group2">
+            <label for="price" class="form__label">Price</label>
+            <input
+              type="number"
+              id="price"
+              name="price"
+              class="form__input"
+              placeholder="Enter tour price"
+              value=""
+            />
+          </div>
+
+          <div class="form__group2">
+            <label for="priceDiscount" class="form__label"
+              >Price Discount</label
+            >
+            <input
+              type="number"
+              id="priceDiscount"
+              name="priceDiscount"
+              class="form__input"
+              placeholder="Enter Price Discount"
+              value=""
+            />
+          </div>
+
+          <div class="form__group2">
+            <label for="summary" class="form__label">Summary</label>
+            <input
+              type="text"
+              id="summary"
+              name="summary"
+              class="form__input"
+              placeholder=""
+              value=""
+            />
+          </div>
+
+          <div class="form__group2">
+            <label for="description" class="form__label">Description</label>
+            <input
+              type="text"
+              id="description"
+              name="description"
+              class="form__input"
+              placeholder=""
+              value=""
+            />
+          </div>
+          <div class="form__group2">
+            <label for="imageCover" class="form__label">Image Cover</label>
+            <input
+              type="file"
+              id="imageCover"
+              name="imageCover"
+              class="form__input"
+              accept="image/*"
+            />
+          </div>
+          <div class="form__group2">
+            <label for="startDates" class="form__label">Start Date</label>
+            <input
+              type="date"
+              id="startDates"
+              name="startDates"
+              class="form__input"
+            />
+          </div>
+
+          <div class="form__group2">
+            <label class="form__label">Start Location</label>
+            <label for="startCoordinate" class="form__sublabel"
+              >Coordinate</label
+            >
+            <input type="text" id="startCoordinate" class="form__input" />
+            <label for="startAddress" class="form__sublabel">Address</label>
+            <input type="text" id="startAddress" class="form__input" />
+            <label for="startDescription" class="form__sublabel"
+              >Description</label
+            >
+            <input type="text" id="startDescription" class="form__input" />
+          </div>
+          <div class="form__group2">
+            <label class="form__label">Locations</label>
+            <label for="locationCoordinate" class="form__sublabel"
+              >Coordinate</label
+            >
+            <input type="text" id="locationCoordinate" class="form__input" />
+            <label for="locationAddress" class="form__sublabel">Address</label>
+            <input type="text" id="locationAddress" class="form__input" />
+            <label for="locationDescription" class="form__sublabel"
+              >Description</label
+            >
+            <input type="text" id="locationDescription" class="form__input" />
+          </div>
+          <div class="form__group2">
+            <label for="tourGuide" class="form__label">Guide</label>
+            <input
+              type="text"
+              id="tourGuide"
+              class="form__input"
+              placeholder="Select a Guider"
+              value=""
+            />
+          </div>
+          <div class="form__group2">
+            <label for="secretTour" class="form__label">Secret Tour</label>
+            <label class="switch">
+              <input id="secretTour" type="checkbox" />
+              <span class="slider round"></span>
+            </label>
+          </div>
+
+          <button type="submit" class="btn btn--green btn-small btn--center">
+            Save
+          </button>
+        </form>
+      </div>
+      <div class="overlay"></div>
+    </div>
+  </body>
+</html>

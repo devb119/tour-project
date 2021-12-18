@@ -24,6 +24,19 @@ router.get('/me', authController.protect, viewsController.getAccount);
 
 router.get('/my-tours', authController.protect, viewsController.getMyTours);
 
+router.get(
+  '/user',
+  authController.protect,
+  authController.restrictTo('admin'),
+  viewsController.getUser
+);
+router.get(
+  '/tour-mng',
+  authController.protect,
+  authController.restrictTo('admin'),
+  viewsController.updateTour
+);
+
 // Old way to update via form
 // router.post(
 //   '/submit-user-data',

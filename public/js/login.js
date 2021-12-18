@@ -28,11 +28,12 @@ export const logout = async () => {
       method: 'GET',
       url: '/api/v1/users/logout',
     });
-    if (res.data.status === 'success')
+    if (res.data.status === 'success') {
       window.setTimeout(() => {
         location.assign('/');
-      }, 250);
-    // location.reload(true);
+      }, 500);
+      showAlert('success', 'You have been logged out.');
+    }
   } catch (err) {
     showAlert('error', 'Error logging out! Try again.');
   }

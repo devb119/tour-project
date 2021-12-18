@@ -42,4 +42,111 @@ block content
               span.card__footer-value= tour.ratingsAverage
               | 
               span.card__footer-text= `rating (${tour.ratingsQuantity})`
-            a.btn.btn--green.btn--small(href=`/tour/${tour.slug}`) Details
+            if review
+              a.btn.btn--green.btn--small.review(data-tour=`${tour.name},${tour.imageCover}`) Make a review
+            else if update
+              a.btn.btn--green.btn--small.edit-tour(data-tour=`${JSON.stringify(tour)}`) Edit tour
+            else
+              a.btn.btn--green.btn--small(href=`/tour/${tour.slug}`) Details
+    .overlay.hidden
+    .management__form.tour-form.hidden
+      button.btn-close X
+      h1.heading-secondary.ma-bt-lg
+        i.fa.fa-pencil-square-o
+        |  Tour Management
+      form.form.form-container
+        .form__group2
+          label.form__label(for='tourName') Tour Name
+          input#tourName.form__input(type='text' placeholder='Enter Name' value='')
+        .form__group2
+          label.form__label(for='duration') Duration
+          input#duration.form__input(type='number' name='duration' placeholder='Enter duration' value='')
+        .form__group2
+          label.form__label(for='maxGroupSize') Group Size
+          input#maxGroupSize.form__input(type='number' name='maxGroupSize' placeholder='Enter Group Size' value='')
+        .form__group2
+          label.form__label(for='difficulty') Difficulty
+          select#difficulty.form__input
+            option(value='easy') Easy
+            option(value='medium') Medium
+            option(value='difficult') Difficult
+        .form__group2
+          label.form__label(for='ratingsAverage') Ratings Average
+          input#ratingsAverage.form__input(type='number' name='ratetingsAverage' placeholder='4.5' value='')
+        .form__group2
+          label.form__label(for='ratingsQuantity') Ratings Quantity
+          input#ratingsQuantity.form__input(type='number' name='ratingsQuantity' placeholder='' value='')
+        .form__group2
+          label.form__label(for='price') Price
+          input#price.form__input(type='number' name='price' placeholder='Enter tour price' value='')
+        .form__group2
+          label.form__label(for='priceDiscount') Price Discount
+          input#priceDiscount.form__input(type='number' name='priceDiscount' placeholder='Enter Price Discount' value='')
+        .form__group2
+          label.form__label(for='summary') Summary
+          input#summary.form__input(type='text' name='summary' placeholder='' value='')
+        .form__group2
+          label.form__label(for='description') Description
+          input#description.form__input(type='text' name='description' placeholder='' value='')
+        .form__group2
+          label.form__label(for='imageCover') Image Cover
+          input#imageCover.form__input(type='file' name='imageCover' accept='image/*')
+        .form__group2
+          label.form__label(for='startDates') Start Date
+          input#startDates.form__input(type='date' name='startDates')
+        .form__group2
+          label.form__label Start Location
+          label.form__sublabel(for='startCoordinate') Coordinate
+          input#startCoordinate.form__input(type='text')
+          label.form__sublabel(for='startAddress') Address
+          input#startAddress.form__input(type='text')
+          label.form__sublabel(for='startDescription') Description
+          input#startDescription.form__input(type='text')
+        .form__group2
+          label.form__label Locations
+          label.form__sublabel(for='locationCoordinate') Coordinate
+          input#locationCoordinate.form__input(type='text')
+          label.form__sublabel(for='locationAddress') Address
+          input#locationAddress.form__input(type='text')
+          label.form__sublabel(for='locationDescription') Description
+          input#locationDescription.form__input(type='text')
+        .form__group2
+          label.form__label(for='tourGuide') Guide
+          input#tourGuide.form__input(type='text' placeholder='Select a Guider' value='')
+        .form__group2
+          label.form__label(for='secretTour') Secret Tour
+          label.switch
+            input#secretTour(type='checkbox')
+            span.slider.round
+        button.btn.btn--green.btn-small.btn--center(type='submit')
+          | Save
+    .reviews_box.hidden
+      .card
+        .card__header
+          .card__picture
+            img.card__picture-img(src='https://wallpaperaccess.com/full/2963445.jpg')
+          h3.heading-tertirary
+            span TourName
+        .card__details(style='display: block')
+          .reviews__avatar
+            img.reviews__avatar-img(src=`/img/users/${user.photo}` alt=`${user.name}`)
+            h6.reviews__user= user.name
+          .reviews__rating
+            input#rating-5(type='radio' name='rate' value='5')
+            label.far.fa-star(for='rating-5')
+            input#rating-4(type='radio' name='rate' value='4')
+            label.far.fa-star(for='rating-4')
+            input#rating-3(type='radio' name='rate' value='3')
+            label.far.fa-star(for='rating-3')
+            input#rating-2(type='radio' name='rate' value='2')
+            label.far.fa-star(for='rating-2')
+            input#rating-1(type='radio' name='rate' value='1')
+            label.far.fa-star(for='rating-1')
+            .breakline
+            header
+          .text_box
+            textarea#reviews_text.form__input(cols='30' rows='6' placeholder='Write you review here...')
+        .card__footer
+          button.btn.btn--grey.btn--small
+            | Discard
+          button.btn.btn--green.btn--small Save
