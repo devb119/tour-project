@@ -5,6 +5,7 @@ import { updateSettings } from './updateSettings';
 import { bookTour } from './stripe';
 import { showAlert } from './alert';
 import { signup } from './signup';
+import { createReview } from './createReview';
 
 // DOM ELEMENT
 const mapBox = document.getElementById('map');
@@ -21,8 +22,18 @@ const overlay = document.querySelector('.overlay');
 const editTourForm = document.querySelector('.tour-form');
 const closeBtn = document.querySelector('.btn-close');
 
+// REVIEWS
 const reviewForm = document.querySelector('.reviews_box');
+const discardRvBtn = document.querySelector('.btn--discard-rv');
+const saveRvBtn = document.querySelector('.btn--save-rv');
 // VALUES
+
+// FUNCTIONS
+const hideForm = () => {
+  overlay.classList.add('hidden');
+  if (editTourForm) editTourForm.classList.add('hidden');
+  if (reviewForm) reviewForm.classList.add('hidden');
+};
 
 if (mapBox) {
   const locations = JSON.parse(mapBox.dataset.locations);
@@ -89,13 +100,16 @@ if (bookBtn) {
   });
 }
 
+// Show edit tour/review
+let reviewTourId;
 if (cardContainer) {
   cardContainer.addEventListener('click', (e) => {
     const reviewBtn = e.target.closest('.review');
     const editTourBtn = e.target.closest('.edit-tour');
     if (reviewBtn) {
-      const [name, imageCover] = reviewBtn.dataset.tour.split(',');
-      console.log(name, imageCover);
+      const [tourId, name, imageCover] = reviewBtn.dataset.tour.split(',');
+      console.log(tourId, name, imageCover);
+      reviewTourId = tourId;
       reviewForm.querySelector(
         '.card__picture-img'
       ).src = `/img/tours/${imageCover}`;
@@ -131,17 +145,27 @@ if (cardContainer) {
 }
 
 if (overlay) {
-  overlay.addEventListener('click', () => {
-    overlay.classList.add('hidden');
-    editTourForm.classList.add('hidden');
-    reviewForm.classList.add('hidden');
-  });
+  overlay.addEventListener('click', hideForm);
 }
 
 if (closeBtn) {
-  closeBtn.addEventListener('click', () => {
-    overlay.classList.add('hidden');
-    editTourForm.classList.add('hidden');
+  closeBtn.addEventListener('click', hideForm);
+}
+
+// Review
+if (discardRvBtn) {
+  discardRvBtn.addEventListener('click', hideForm);
+}
+
+if (saveRvBtn) {
+  saveRvBtn.addEventListener('click', async (e) => {
+    e.preventDefault();
+    const review = reviewForm.querySelector('#reviews_text').value;
+    const rating = reviewForm.querySelector('input[name="rate"]:checked').value;
+    const tour = reviewTourId;
+    console.log(review, rating);
+    await createReview(review, rating, tour);
+    hideForm();
   });
 }
 
@@ -151,7 +175,6 @@ if (alertMessage) showAlert('success', alertMessage, 8);
 if (signUpForm) {
   signUpForm.addEventListener('submit', (e) => {
     e.preventDefault();
-    console.log('aa');
     const name = document.getElementById('name').value;
     const email = document.getElementById('email').value;
     const password = document.getElementById('password').value;
