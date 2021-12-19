@@ -163,7 +163,7 @@ if (saveRvBtn) {
     const review = reviewForm.querySelector('#reviews_text').value;
     const rating = reviewForm.querySelector('input[name="rate"]:checked').value;
     const tour = reviewTourId;
-    console.log(review, rating);
+    console.log(review, rating, tour);
     await createReview(review, rating, tour);
     hideForm();
   });

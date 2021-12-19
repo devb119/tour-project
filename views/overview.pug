@@ -133,7 +133,7 @@ block content
             .reviews__avatar
               img.reviews__avatar-img(src=`/img/users/${user.photo}` alt=`${user.name}`)
               h6.reviews__user= user.name
-            .reviews__rating
+            .reviews__rating--self
               input#rating-5(type='radio' name='rate' value='5')
               label.far.fa-star(for='rating-5')
               input#rating-4(type='radio' name='rate' value='4')

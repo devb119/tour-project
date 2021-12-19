@@ -11,12 +11,14 @@ export const createReview = async (review, rating, tour) => {
         rating,
       },
     });
-
+    console.log(res);
     if (res.data.status === 'success') {
       showAlert('success', 'Your review has been saved.');
-      window.setTimeout(() => location.reload(true), 2000);
+      window.setTimeout(() => location.reload(true));
+    } else {
+      showAlert('error', 'You have already reviewed about this tour');
     }
   } catch (err) {
-    showAlert('error', error.response.data.message);
+    showAlert('error', err.response.data.message);
   }
 };

@@ -9152,28 +9152,31 @@ var createReview = /*#__PURE__*/function () {
 
           case 3:
             res = _context.sent;
+            console.log(res);
 
             if (res.data.status === 'success') {
               (0, _alert.showAlert)('success', 'Your review has been saved.');
               window.setTimeout(function () {
                 return location.reload(true);
-              }, 2000);
+              });
+            } else {
+              (0, _alert.showAlert)('error', 'You have already reviewed about this tour');
             }
 
-            _context.next = 10;
+            _context.next = 11;
             break;
 
-          case 7:
-            _context.prev = 7;
+          case 8:
+            _context.prev = 8;
             _context.t0 = _context["catch"](0);
-            (0, _alert.showAlert)('error', error.response.data.message);
+            (0, _alert.showAlert)('error', _context.t0.response.data.message);
 
-          case 10:
+          case 11:
           case "end":
             return _context.stop();
         }
       }
-    }, _callee, null, [[0, 7]]);
+    }, _callee, null, [[0, 8]]);
   }));
 
   return function createReview(_x, _x2, _x3) {
@@ -9672,7 +9675,7 @@ if (saveRvBtn) {
               review = reviewForm.querySelector('#reviews_text').value;
               rating = reviewForm.querySelector('input[name="rate"]:checked').value;
               tour = reviewTourId;
-              console.log(review, rating);
+              console.log(review, rating, tour);
               _context3.next = 7;
               return (0, _createReview.createReview)(review, rating, tour);
 
@@ -9735,7 +9738,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "51847" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "54484" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
