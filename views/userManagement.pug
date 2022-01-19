@@ -8,6 +8,10 @@ mixin navItem(link, text, icon, active)
       | #{text}
 
 block content 
+  .overlay.hidden
+  include _updateUserForm
+  include _addUserForm
+  include _confirm
   main.main
     .user-view
       nav.user-view__menu
@@ -44,11 +48,11 @@ block content
                   th.table__label Status
                   th.table__label Actions
               tbody
-                -let i=0
                 each user in users 
-                  -i++
+                  -let id = user._id
+                  -id = String(id).slice(20)
                   tr
-                    td= `${i}`
+                    td= `${id}`
                     td
                       img(src=`/img/users/${user.photo}`)
                       span.user-name= user.name
@@ -58,7 +62,7 @@ block content
                       span.status.text-success &bull;
                       |  Active
                     td
-                      button.mg-right-sm
+                      button.edit-btn.mg-right-sm(data-user=`${JSON.stringify(user)}`)
                         i.fas.fa-user-edit
-                      button
+                      button.delete-btn(data-user-id=`${user.id}`)
                         i.fas.fa-user-minus

@@ -1,0 +1,19 @@
+#edit-user-form.management__form.tour-form.auto-height.hidden
+  h1.heading-secondary.ma-bt-lg
+    i.fa.fa-pencil-square-o
+    |  User Management
+  form.form.form-container.form--user
+    .form__group2
+      label.form__label(for='nameU') User Name
+      input#nameU.form__input(type='text' placeholder='Enter Name' readonly)
+    .form__group2
+      label.form__label(for='emailU') Email
+      input#emailU.form__input(type='text' name='emailU' placeholder='example@example.com' value='' readonly)
+    .form__group2
+      label.form__label(for='roleU') Role
+      select#roleU.form__input
+        option(value='admin') Admin
+        option(value='guide') Guide
+        option(value='user') User
+    button.btn.btn--green.btn-small#update-user(type='submit')
+      | Save

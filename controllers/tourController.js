@@ -5,6 +5,7 @@ const catchAsync = require('../utils/catchAsync');
 const factory = require('./handlerFactory');
 const multer = require('multer');
 const sharp = require('sharp');
+const { ObjectId } = require('mongoose').Types;
 
 exports.aliasTopTours = (req, res, next) => {
   req.query.limit = '5';
@@ -67,6 +68,37 @@ exports.resizeTourImages = catchAsync(async (req, res, next) => {
 exports.getAllTours = factory.getAll(Tour);
 
 exports.getTour = factory.getOne(Tour, 'reviews');
+
+exports.formatData = catchAsync(async (req, res, next) => {
+  let tour;
+  if (req.method === 'PATCH') tour = await Tour.findById(req.params.id);
+  req.body.duration = +req.body.duration;
+  req.body.maxGroupSize = +req.body.maxGroupSize;
+  req.body.price = +req.body.price;
+  req.body.imageCover =
+    req.body.imageCover === 'undefined' ? tour.imageCover : req.body.imageCover;
+  req.body.images =
+    req.body.images[0] === 'undefined' ? tour.images : req.body.images;
+  console.log(req.body.images);
+  if (req.method === 'POST') {
+    req.body.ratingsAverage = 4.5;
+    req.body.ratingsQuantity = 0;
+  } else {
+    req.body.ratingsAverage = +req.body.ratingsAverage;
+    req.body.ratingsQuantity = +req.body.ratingsQuantity;
+  }
+  req.body.guides = JSON.parse(req.body.guides);
+  req.body.startDates = JSON.parse(req.body.startDates);
+  req.body.startLocation = JSON.parse(req.body.startLocation);
+  req.body.locations = JSON.parse(req.body.locations);
+  if (req.method === 'PUSH') {
+    req.body.locations[0]._id = `${ObjectId()}`;
+    req.body.locations[1]._id = `${ObjectId()}`;
+    req.body.locations[2]._id = `${ObjectId()}`;
+  }
+  console.log(req.body);
+  next();
+});
 
 exports.createTour = factory.createOne(Tour);
 

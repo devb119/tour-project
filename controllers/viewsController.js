@@ -24,6 +24,17 @@ exports.getOverview = catchAsync(async (req, res, next) => {
   });
 });
 
+exports.searchTour = catchAsync(async (req, res, next) => {
+  const tours = await Tour.find({
+    name: { $regex: req.params.key, $options: 'i' },
+  });
+  console.log(req.params.key, tours);
+  res.status(200).render('overview', {
+    title: Tour,
+    tours,
+  });
+});
+
 exports.getTour = catchAsync(async (req, res, next) => {
   // 1) Get the data for the requested tour, including reviews and guides
   const tour = await Tour.findOne({ slug: req.params.slug }).populate({
@@ -103,7 +114,7 @@ exports.updateUserData = catchAsync(async (req, res, next) => {
 exports.getUser = catchAsync(async (req, res, next) => {
   const users = await User.find({ role: { $ne: 'admin' } });
 
-  res.status(200).render('user-management', {
+  res.status(200).render('userManagement', {
     title: 'User Management',
     users,
   });
@@ -111,10 +122,14 @@ exports.getUser = catchAsync(async (req, res, next) => {
 
 exports.updateTour = catchAsync(async (req, res, next) => {
   const tours = await Tour.find();
+  const users = await User.find({
+    role: 'guide',
+  });
 
   res.status(200).render('overview', {
     title: 'Tour Management',
     tours,
+    users,
     update: true,
   });
 });

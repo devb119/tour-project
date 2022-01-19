@@ -15,6 +15,12 @@ router.get(
   viewsController.getOverview
 );
 
+router.get(
+  '/search/:key',
+  authController.isLoggedIn,
+  viewsController.searchTour
+);
+
 router.get('/tour/:slug', authController.isLoggedIn, viewsController.getTour);
 
 router.get('/login', authController.isLoggedIn, viewsController.getLoginForm);
@@ -30,6 +36,7 @@ router.get(
   authController.restrictTo('admin'),
   viewsController.getUser
 );
+
 router.get(
   '/tour-mng',
   authController.protect,

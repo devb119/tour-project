@@ -1,0 +1,19 @@
+#add-user-form.management__form.tour-form.auto-height.hidden
+  h1.heading-secondary.ma-bt-lg
+    i.fa.fa-pencil-square-o
+    |  User Management
+  form.form.form-container.form--user
+    .form__group2
+      label.form__label(for='name') User Name
+      input#name.form__input(type='text' placeholder='Enter Name' value='')
+    .form__group2
+      label.form__label(for='email') Email
+      input#email.form__input(type='text' name='email' placeholder='example@example.com' value='')
+    .form__group2
+      label.form__label(for='role') Role
+      select#role.form__input
+        option(value='admin') Admin
+        option(value='guide') Guide
+        option(value='user') User
+    button.btn.btn--green.btn-small#add-user(type='submit')
+      | Save

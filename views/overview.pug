@@ -2,8 +2,9 @@ extends base
 
 block content 
   main.main 
+    if update
+      btn.btn.btn--green#add-tour-btn Add Tour
     .card-container
-
       each tour in tours 
         .card 
           .card__header 
@@ -34,23 +35,25 @@ block content
               span= `${tour.maxGroupSize} people`
 
           .card__footer 
-            p
-              span.card__footer-value= `$${tour.price}`
-              | 
-              span.card__footer-text per person 
-            p.card__ratings 
-              span.card__footer-value= tour.ratingsAverage
-              | 
-              span.card__footer-text= `rating (${tour.ratingsQuantity})`
+            div
+              p
+                span.card__footer-value= `$${tour.price}`
+                | 
+                span.card__footer-text per person 
+              p.card__ratings 
+                span.card__footer-value= tour.ratingsAverage
+                | 
+                span.card__footer-text= `rating (${tour.ratingsQuantity})`
             if review
               a.btn.btn--green.btn--small.review(data-tour=`${tour._id},${tour.name},${tour.imageCover}`) Make a review
             else if update
               a.btn.btn--green.btn--small.edit-tour(data-tour=`${JSON.stringify(tour)}`) Edit tour
+              button.btn.btn--small.delete-tour-btn(data-tour-id=`${tour._id}`) Delete tour
             else
               a.btn.btn--green.btn--small(href=`/tour/${tour.slug}`) Details
     .overlay.hidden
     if update
-      .management__form.tour-form.hidden
+      #tour-form.management__form.tour-form.hidden
         button.btn-close X
         h1.heading-secondary.ma-bt-lg
           i.fa.fa-pencil-square-o
@@ -58,7 +61,7 @@ block content
         form.form.form-container
           .form__group2
             label.form__label(for='tourName') Tour Name
-            input#tourName.form__input(type='text' placeholder='Enter Name' value='')
+            input#tourName.form__input(type='text' placeholder='Enter Name' value='' name='name')
           .form__group2
             label.form__label(for='duration') Duration
             input#duration.form__input(type='number' name='duration' placeholder='Enter duration' value='')
@@ -67,88 +70,89 @@ block content
             input#maxGroupSize.form__input(type='number' name='maxGroupSize' placeholder='Enter Group Size' value='')
           .form__group2
             label.form__label(for='difficulty') Difficulty
-            select#difficulty.form__input
+            select#difficulty.form__input(name='difficulty')
               option(value='easy') Easy
               option(value='medium') Medium
               option(value='difficult') Difficult
           .form__group2
             label.form__label(for='ratingsAverage') Ratings Average
-            input#ratingsAverage.form__input(type='number' name='ratetingsAverage' placeholder='4.5' value='')
+            input#ratingsAverage.form__input(type='number' name='ratingsAverage' placeholder='4.5')
           .form__group2
             label.form__label(for='ratingsQuantity') Ratings Quantity
-            input#ratingsQuantity.form__input(type='number' name='ratingsQuantity' placeholder='' value='')
+            input#ratingsQuantity.form__input(type='number' name='ratingsQuantity' placeholder='0')
           .form__group2
             label.form__label(for='price') Price
             input#price.form__input(type='number' name='price' placeholder='Enter tour price' value='')
           .form__group2
-            label.form__label(for='priceDiscount') Price Discount
-            input#priceDiscount.form__input(type='number' name='priceDiscount' placeholder='Enter Price Discount' value='')
           .form__group2
             label.form__label(for='summary') Summary
-            input#summary.form__input(type='text' name='summary' placeholder='' value='')
+            textarea#summary.form__input(type='text' name='summary' placeholder='' cols='30' rows='6')
           .form__group2
             label.form__label(for='description') Description
-            input#description.form__input(type='text' name='description' placeholder='' value='')
+            textarea#description.form__input(type='text' name='description' placeholder='' cols='30' rows='6')
           .form__group2
-            label.form__label(for='imageCover') Image Cover
+            label.form__label(for='imageCover') Image
+            label.form__sublabel(for='imageCover') Image Cover
             input#imageCover.form__input(type='file' name='imageCover' accept='image/*')
+            label.form__sublabel(for='image1') Image 1
+            input#image1.form__input(type='file' name='images' accept='image/*')
+            label.form__sublabel(for='image2') Image 2
+            input#image2.form__input(type='file' name='images' accept='image/*')
+            label.form__sublabel(for='image3') Image 3
+            input#image3.form__input(type='file' name='images' accept='image/*')
           .form__group2
-            label.form__label(for='startDates') Start Date
-            input#startDates.form__input(type='date' name='startDates')
+            label.form__label Start Date
+            label.form__sublabel(for='startdate1') Start Date 1
+            input#startDate1.form__input(type='date' name='startDate1')
+            label.form__sublabel(for='startdate2') Start Date 2
+            input#startDate2.form__input(type='date'  name='startDate2')
+            label.form__sublabel(for='startdate3') Start Date 3
+            input#startDate3.form__input(type='date' name='startDate3')
+          .form__group2
+            label.form__label Guider
+            .form__group2
+            label.form__label(for='guide1') Guide 1
+            select#guide1.form__input(name='guide1')
+              each user in users
+                option(value=`${user._id}`)= user.email
+            label.form__label(for='guide2') Guide 2
+            select#guide2.form__input(name='guide1')
+              each user in users
+                option(value=`${user._id}`)= user.email
+            label.form__label(for='guide3') Guide 3
+            select#guide3.form__input(name='guide1')
+              each user in users
+                option(value=`${user._id}`)= user.email
           .form__group2
             label.form__label Start Location
             label.form__sublabel(for='startCoordinate') Coordinate
-            input#startCoordinate.form__input(type='text')
+            input#startCoordinate.form__input(type='text' name='startCoord')
             label.form__sublabel(for='startAddress') Address
-            input#startAddress.form__input(type='text')
+            input#startAddress.form__input(type='text' name='startAddress')
             label.form__sublabel(for='startDescription') Description
-            input#startDescription.form__input(type='text')
+            input#startDescription.form__input(type='text' name='startDescription')
           .form__group2
-            label.form__label Locations
-            label.form__sublabel(for='locationCoordinate') Coordinate
-            input#locationCoordinate.form__input(type='text')
-            label.form__sublabel(for='locationAddress') Address
-            input#locationAddress.form__input(type='text')
-            label.form__sublabel(for='locationDescription') Description
-            input#locationDescription.form__input(type='text')
+            label.form__label Location 1
+            label.form__sublabel(for='locationCoordinate1') Coordinate 1
+            input#locationCoordinate1.form__input(type='text' name='locationCoordinate1')
+            label.form__sublabel(for='locationDescription1') Description 1
+            input#locationDescription1.form__input(type='text' name='locationDescription1')
           .form__group2
-            label.form__label(for='tourGuide') Guide
-            input#tourGuide.form__input(type='text' placeholder='Select a Guider' value='')
+            label.form__label Location 2
+            label.form__sublabel(for='locationCoordinate2') Coordinate 2
+            input#locationCoordinate2.form__input(type='text' name='locationCoordinate2')
+            label.form__sublabel(for='locationDescription2') Description 2
+            input#locationDescription2.form__input(type='text' name='locationDescription2')
           .form__group2
-            label.form__label(for='secretTour') Secret Tour
-            label.switch
-              input#secretTour(type='checkbox')
-              span.slider.round
-          button.btn.btn--green.btn-small.btn--center(type='submit')
+            label.form__label Location3
+            label.form__sublabel(for='locationCoordinate3') Coordinate 3
+            input#locationCoordinate3.form__input(type='text' name='locationCoordinate3')
+            label.form__sublabel(for='locationDescription3') Description 3
+            input#locationDescription3.form__input(type='text' name='locationDescription3')
+          button.btn.btn--green.btn-small.btn--center#add-tour(type='submit')
+            | Save
+          button.btn.btn--green.btn-small.btn--center#update-tour(type='submit').hidden
             | Save
     if review
-      .reviews_box.hidden
-        .card
-          .card__header
-            .card__picture
-              img.card__picture-img(src='https://wallpaperaccess.com/full/2963445.jpg')
-            h3.heading-tertirary
-              span TourName
-          .card__details(style='display: block')
-            .reviews__avatar
-              img.reviews__avatar-img(src=`/img/users/${user.photo}` alt=`${user.name}`)
-              h6.reviews__user= user.name
-            .reviews__rating--self
-              input#rating-5(type='radio' name='rate' value='5')
-              label.far.fa-star(for='rating-5')
-              input#rating-4(type='radio' name='rate' value='4')
-              label.far.fa-star(for='rating-4')
-              input#rating-3(type='radio' name='rate' value='3')
-              label.far.fa-star(for='rating-3')
-              input#rating-2(type='radio' name='rate' value='2')
-              label.far.fa-star(for='rating-2')
-              input#rating-1(type='radio' name='rate' value='1')
-              label.far.fa-star(for='rating-1')
-              .breakline
-              header
-            .text_box
-              textarea#reviews_text.form__input(cols='30' rows='6' placeholder='Write you review here...')
-          .card__footer
-            button.btn.btn--grey.btn--small.btn--discard-rv
-              | Discard
-            button.btn.btn--green.btn--small.btn--save-rv Save
+      include _reviewForm
+    include _confirm

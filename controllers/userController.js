@@ -5,6 +5,7 @@ const catchAsync = require('../utils/catchAsync');
 const factory = require('./handlerFactory');
 const multer = require('multer');
 const sharp = require('sharp');
+const Email = require('../utils/email');
 
 // const multerStorage = multer.diskStorage({
 //   destination: (req, file, cb) => {
@@ -92,12 +93,27 @@ exports.deleteMe = catchAsync(async (req, res, next) => {
   });
 });
 
-exports.createUser = (req, res) => {
-  res.status(500).json({
-    status: 'error',
-    message: 'This route is not defined. Please use /signup instead',
+exports.createUser = catchAsync(async (req, res) => {
+  const createRandomPassword = (length) => {
+    var result = '';
+    var characters =
+      'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    var charactersLength = characters.length;
+    for (var i = 0; i < length; i++) {
+      result += characters.charAt(Math.floor(Math.random() * charactersLength));
+    }
+    return result;
+  };
+  const url = `${req.protocol}://${req.get('host')}/login`;
+  req.body.password = createRandomPassword(8);
+  req.body.passwordConfirm = req.body.password;
+  const user = await User.create(req.body);
+  await new Email(user, url).sendPassword(req.body.password);
+  res.status(201).json({
+    status: 'success',
+    data: user,
   });
-};
+});
 
 exports.getAllUsers = factory.getAll(User);
 

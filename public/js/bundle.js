@@ -9185,6 +9185,279 @@ var createReview = /*#__PURE__*/function () {
 }();
 
 exports.createReview = createReview;
+},{"axios":"../../node_modules/axios/index.js","./alert":"alert.js"}],"manipulateUser.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.updateUser = exports.deleteUser = exports.addUser = void 0;
+
+var _axios = _interopRequireDefault(require("axios"));
+
+var _alert = require("./alert");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+var deleteUser = /*#__PURE__*/function () {
+  var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(id) {
+    var res;
+    return regeneratorRuntime.wrap(function _callee$(_context) {
+      while (1) {
+        switch (_context.prev = _context.next) {
+          case 0:
+            _context.prev = 0;
+            _context.next = 3;
+            return (0, _axios.default)({
+              url: "/api/v1/users/".concat(id),
+              method: 'DELETE'
+            });
+
+          case 3:
+            res = _context.sent;
+            console.log(res);
+
+            if (res.status === 204) {
+              (0, _alert.showAlert)('success', 'User has been removed');
+              window.setTimeout(function () {
+                return location.reload(true);
+              }, 2000);
+            }
+
+            _context.next = 11;
+            break;
+
+          case 8:
+            _context.prev = 8;
+            _context.t0 = _context["catch"](0);
+            (0, _alert.showAlert)('error', _context.t0.response.data.message);
+
+          case 11:
+          case "end":
+            return _context.stop();
+        }
+      }
+    }, _callee, null, [[0, 8]]);
+  }));
+
+  return function deleteUser(_x) {
+    return _ref.apply(this, arguments);
+  };
+}();
+
+exports.deleteUser = deleteUser;
+
+var addUser = /*#__PURE__*/function () {
+  var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2(data) {
+    var res;
+    return regeneratorRuntime.wrap(function _callee2$(_context2) {
+      while (1) {
+        switch (_context2.prev = _context2.next) {
+          case 0:
+            _context2.prev = 0;
+            _context2.next = 3;
+            return (0, _axios.default)({
+              method: 'POST',
+              url: "/api/v1/users",
+              data: data
+            });
+
+          case 3:
+            res = _context2.sent;
+
+            if (res.data.status === 'success') {
+              (0, _alert.showAlert)('success', "User has been created successfully!");
+              window.setTimeout(function () {
+                location.reload(true);
+              }, 2000);
+            }
+
+            _context2.next = 10;
+            break;
+
+          case 7:
+            _context2.prev = 7;
+            _context2.t0 = _context2["catch"](0);
+            (0, _alert.showAlert)('error', _context2.t0.response.data.message);
+
+          case 10:
+          case "end":
+            return _context2.stop();
+        }
+      }
+    }, _callee2, null, [[0, 7]]);
+  }));
+
+  return function addUser(_x2) {
+    return _ref2.apply(this, arguments);
+  };
+}();
+
+exports.addUser = addUser;
+
+var updateUser = /*#__PURE__*/function () {
+  var _ref3 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee3(data, id) {
+    var res;
+    return regeneratorRuntime.wrap(function _callee3$(_context3) {
+      while (1) {
+        switch (_context3.prev = _context3.next) {
+          case 0:
+            _context3.prev = 0;
+            _context3.next = 3;
+            return (0, _axios.default)({
+              method: 'PATCH',
+              url: "/api/v1/users/".concat(id),
+              data: data
+            });
+
+          case 3:
+            res = _context3.sent;
+
+            if (res.data.status === 'success') {
+              (0, _alert.showAlert)('success', "User has been updated successfully!");
+              window.setTimeout(function () {
+                location.reload(true);
+              }, 2000);
+            }
+
+            _context3.next = 10;
+            break;
+
+          case 7:
+            _context3.prev = 7;
+            _context3.t0 = _context3["catch"](0);
+            (0, _alert.showAlert)('error', _context3.t0.response.data.message);
+
+          case 10:
+          case "end":
+            return _context3.stop();
+        }
+      }
+    }, _callee3, null, [[0, 7]]);
+  }));
+
+  return function updateUser(_x3, _x4) {
+    return _ref3.apply(this, arguments);
+  };
+}();
+
+exports.updateUser = updateUser;
+},{"axios":"../../node_modules/axios/index.js","./alert":"alert.js"}],"manipulateTour.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.manipulateTour = exports.deleteTour = void 0;
+
+var _axios = _interopRequireDefault(require("axios"));
+
+var _alert = require("./alert");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+var manipulateTour = /*#__PURE__*/function () {
+  var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(data, id) {
+    var res;
+    return regeneratorRuntime.wrap(function _callee$(_context) {
+      while (1) {
+        switch (_context.prev = _context.next) {
+          case 0:
+            _context.prev = 0;
+            _context.next = 3;
+            return (0, _axios.default)({
+              method: id ? 'PATCH' : 'POST',
+              url: "/api/v1/tours".concat(id ? "/".concat(id) : ''),
+              data: data
+            });
+
+          case 3:
+            res = _context.sent;
+
+            if (res.data.status === 'success') {
+              (0, _alert.showAlert)('success', "Tour has been ".concat(id ? 'updated' : 'created', " successfully!"));
+              window.setTimeout(function () {
+                location.reload(true);
+              }, 2000);
+            }
+
+            _context.next = 10;
+            break;
+
+          case 7:
+            _context.prev = 7;
+            _context.t0 = _context["catch"](0);
+            (0, _alert.showAlert)('error', _context.t0.response.data.message);
+
+          case 10:
+          case "end":
+            return _context.stop();
+        }
+      }
+    }, _callee, null, [[0, 7]]);
+  }));
+
+  return function manipulateTour(_x, _x2) {
+    return _ref.apply(this, arguments);
+  };
+}();
+
+exports.manipulateTour = manipulateTour;
+
+var deleteTour = /*#__PURE__*/function () {
+  var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2(id) {
+    var res;
+    return regeneratorRuntime.wrap(function _callee2$(_context2) {
+      while (1) {
+        switch (_context2.prev = _context2.next) {
+          case 0:
+            _context2.prev = 0;
+            _context2.next = 3;
+            return (0, _axios.default)({
+              method: 'DELETE',
+              url: "/api/v1/tours/".concat(id)
+            });
+
+          case 3:
+            res = _context2.sent;
+
+            if (res.status === 204) {
+              (0, _alert.showAlert)('success', "Tour has been deleted successfully!");
+              window.setTimeout(function () {
+                location.reload(true);
+              }, 2000);
+            }
+
+            _context2.next = 10;
+            break;
+
+          case 7:
+            _context2.prev = 7;
+            _context2.t0 = _context2["catch"](0);
+            (0, _alert.showAlert)('error', _context2.t0.response.data.message);
+
+          case 10:
+          case "end":
+            return _context2.stop();
+        }
+      }
+    }, _callee2, null, [[0, 7]]);
+  }));
+
+  return function deleteTour(_x3) {
+    return _ref2.apply(this, arguments);
+  };
+}();
+
+exports.deleteTour = deleteTour;
 },{"axios":"../../node_modules/axios/index.js","./alert":"alert.js"}],"index.js":[function(require,module,exports) {
 "use strict";
 
@@ -9462,6 +9735,10 @@ var _signup = require("./signup");
 
 var _createReview = require("./createReview");
 
+var _manipulateUser = require("./manipulateUser");
+
+var _manipulateTour = require("./manipulateTour");
+
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -9488,18 +9765,40 @@ var userPasswordForm = document.querySelector('.form-user-password');
 var bookBtn = document.getElementById('book-tour');
 var cardContainer = document.querySelector('.card-container');
 var overlay = document.querySelector('.overlay');
-var editTourForm = document.querySelector('.tour-form');
+var tourForm = document.querySelector('#tour-form');
 var closeBtn = document.querySelector('.btn-close'); // REVIEWS
 
 var reviewForm = document.querySelector('.reviews_box');
 var discardRvBtn = document.querySelector('.btn--discard-rv');
 var saveRvBtn = document.querySelector('.btn--save-rv'); // VALUES
-// FUNCTIONS
+// USERS
 
-var hideForm = function hideForm() {
-  overlay.classList.add('hidden');
-  if (editTourForm) editTourForm.classList.add('hidden');
-  if (reviewForm) reviewForm.classList.add('hidden');
+var editUserForm = document.querySelector('#edit-user-form');
+var addUserForm = document.querySelector('#add-user-form');
+var addUserBtn = document.querySelector('#addNewUser');
+var confirmBox = document.querySelector('.confirm_box');
+var searchInput = document.querySelector('.search_box'); // TOUR
+
+var showAddFormBtn = document.getElementById('add-tour-btn');
+var addTourBtn = document.querySelector('#add-tour');
+var updateTourBtn = document.querySelector('#update-tour'); // FUNCTIONS
+
+var toggleForm = function toggleForm(type) {
+  if (type === 'hide') {
+    overlay.classList.add('hidden');
+    if (tourForm) tourForm.classList.add('hidden');
+    if (reviewForm) reviewForm.classList.add('hidden');
+    if (addUserForm) addUserForm.classList.add('hidden');
+    if (confirmBox) confirmBox.classList.add('hidden');
+    if (editUserForm) editUserForm.classList.add('hidden');
+  }
+
+  if (type === 'show') {
+    overlay.classList.remove('hidden');
+    if (tourForm) tourForm.classList.remove('hidden');
+    if (reviewForm) reviewForm.classList.remove('hidden');
+    if (addUserForm) addUserForm.classList.remove('hidden');
+  }
 };
 
 if (mapBox) {
@@ -9607,11 +9906,13 @@ if (bookBtn) {
 
 
 var reviewTourId;
+var editTourId;
 
 if (cardContainer) {
   cardContainer.addEventListener('click', function (e) {
     var reviewBtn = e.target.closest('.review');
     var editTourBtn = e.target.closest('.edit-tour');
+    var deleteTourBtn = e.target.closest('.delete-tour-btn');
 
     if (reviewBtn) {
       var _reviewBtn$dataset$to = reviewBtn.dataset.tour.split(','),
@@ -9629,38 +9930,71 @@ if (cardContainer) {
     }
 
     if (editTourBtn) {
+      updateTourBtn.classList.remove('hidden');
+      addTourBtn.classList.add('hidden');
       var tour = JSON.parse(editTourBtn.dataset.tour);
-      console.log(tour);
-      editTourForm.querySelector('#tourName').value = tour.name;
-      editTourForm.querySelector('#duration').value = tour.duration;
-      editTourForm.querySelector('#maxGroupSize').value = tour.maxGroupSize;
-      editTourForm.querySelector('#difficulty').value = tour.difficulty;
-      editTourForm.querySelector('#ratingsAverage').value = tour.ratingsAverage;
-      editTourForm.querySelector('#ratingsQuantity').value = tour.ratingsQuantity;
-      editTourForm.querySelector('#price').value = tour.price;
-      editTourForm.querySelector('#priceDiscount').value = tour.priceDiscount;
-      editTourForm.querySelector('#summary').value = tour.summary;
-      editTourForm.querySelector('#description').value = tour.description;
-      editTourForm.querySelector('#startCoordinate').value = "".concat(tour.startLocation.coordinates[0], ", ").concat(tour.startLocation.coordinates[1]);
-      editTourForm.querySelector('#startAddress').value = tour.startLocation.address;
-      editTourForm.querySelector('#startDescription').value = tour.startLocation.description;
+      editTourId = tour._id;
+      tourForm.querySelector('#tourName').value = tour.name;
+      tourForm.querySelector('#duration').value = tour.duration;
+      tourForm.querySelector('#maxGroupSize').value = tour.maxGroupSize;
+      tourForm.querySelector('#difficulty').value = tour.difficulty;
+      tourForm.querySelector('#ratingsAverage').value = tour.ratingsAverage;
+      tourForm.querySelector('#ratingsQuantity').value = tour.ratingsQuantity;
+      tourForm.querySelector('#price').value = tour.price;
+      tourForm.querySelector('#summary').value = tour.summary;
+      tourForm.querySelector('#description').value = tour.description;
+      tourForm.querySelector('#startDate1').value = new Date(tour.startDates[0]).toISOString().split('T')[0];
+      tourForm.querySelector('#startDate2').value = new Date(tour.startDates[1]).toISOString().split('T')[0];
+      tourForm.querySelector('#startDate3').value = new Date(tour.startDates[2]).toISOString().split('T')[0];
+      tourForm.querySelector('#guide1').value = tour.guides[0]._id;
+      tourForm.querySelector('#guide2').value = tour.guides[1]._id;
+      tourForm.querySelector('#guide3').value = tour.guides[2] ? tour.guides[2]._id : '';
+      tourForm.querySelector('#startCoordinate').value = "".concat(tour.startLocation.coordinates[0], ", ").concat(tour.startLocation.coordinates[1]);
+      tourForm.querySelector('#startAddress').value = tour.startLocation.address;
+      tourForm.querySelector('#startDescription').value = tour.startLocation.description;
+      tourForm.querySelector('#locationCoordinate1').value = "".concat(tour.locations[0].coordinates[0], ", ").concat(tour.locations[0].coordinates[1]);
+      tourForm.querySelector('#locationDescription1').value = tour.locations[1].description;
+      tourForm.querySelector('#locationCoordinate2').value = "".concat(tour.locations[1].coordinates[0], ", ").concat(tour.locations[1].coordinates[1]);
+      tourForm.querySelector('#locationDescription2').value = tour.locations[2].description;
+      tourForm.querySelector('#locationCoordinate3').value = "".concat(tour.locations[2].coordinates[0], ", ").concat(tour.locations[2].coordinates[1]);
+      tourForm.querySelector('#locationDescription3').value = tour.locations[2].description;
       overlay.classList.remove('hidden');
-      editTourForm.classList.remove('hidden');
+      tourForm.classList.remove('hidden');
+    }
+
+    if (deleteTourBtn) {
+      var _tourId = deleteTourBtn.dataset.tourId;
+      confirmBox.classList.remove('hidden');
+      overlay.classList.remove('hidden');
+      var cancel = document.getElementById('cancel');
+      var confirm = document.getElementById('confirm');
+      cancel.addEventListener('click', function () {
+        return toggleForm('hide');
+      });
+      confirm.addEventListener('click', function () {
+        return (0, _manipulateTour.deleteTour)(_tourId);
+      });
     }
   });
 }
 
 if (overlay) {
-  overlay.addEventListener('click', hideForm);
+  overlay.addEventListener('click', function () {
+    return toggleForm('hide');
+  });
 }
 
 if (closeBtn) {
-  closeBtn.addEventListener('click', hideForm);
+  closeBtn.addEventListener('click', function () {
+    return toggleForm('hide');
+  });
 } // Review
 
 
 if (discardRvBtn) {
-  discardRvBtn.addEventListener('click', hideForm);
+  discardRvBtn.addEventListener('click', function () {
+    return toggleForm('hide');
+  });
 }
 
 if (saveRvBtn) {
@@ -9680,7 +10014,7 @@ if (saveRvBtn) {
               return (0, _createReview.createReview)(review, rating, tour);
 
             case 7:
-              hideForm();
+              toggleForm('hide');
 
             case 8:
             case "end":
@@ -9710,7 +10044,276 @@ if (signUpForm) {
     (0, _signup.signup)(name, email, password, passwordConfirm);
   });
 }
-},{"core-js/modules/es6.array.copy-within.js":"../../node_modules/core-js/modules/es6.array.copy-within.js","core-js/modules/es6.array.fill.js":"../../node_modules/core-js/modules/es6.array.fill.js","core-js/modules/es6.array.filter.js":"../../node_modules/core-js/modules/es6.array.filter.js","core-js/modules/es6.array.find.js":"../../node_modules/core-js/modules/es6.array.find.js","core-js/modules/es6.array.find-index.js":"../../node_modules/core-js/modules/es6.array.find-index.js","core-js/modules/es7.array.flat-map.js":"../../node_modules/core-js/modules/es7.array.flat-map.js","core-js/modules/es6.array.from.js":"../../node_modules/core-js/modules/es6.array.from.js","core-js/modules/es7.array.includes.js":"../../node_modules/core-js/modules/es7.array.includes.js","core-js/modules/es6.array.iterator.js":"../../node_modules/core-js/modules/es6.array.iterator.js","core-js/modules/es6.array.map.js":"../../node_modules/core-js/modules/es6.array.map.js","core-js/modules/es6.array.of.js":"../../node_modules/core-js/modules/es6.array.of.js","core-js/modules/es6.array.slice.js":"../../node_modules/core-js/modules/es6.array.slice.js","core-js/modules/es6.array.species.js":"../../node_modules/core-js/modules/es6.array.species.js","core-js/modules/es6.date.to-primitive.js":"../../node_modules/core-js/modules/es6.date.to-primitive.js","core-js/modules/es6.function.has-instance.js":"../../node_modules/core-js/modules/es6.function.has-instance.js","core-js/modules/es6.function.name.js":"../../node_modules/core-js/modules/es6.function.name.js","core-js/modules/es6.map.js":"../../node_modules/core-js/modules/es6.map.js","core-js/modules/es6.math.acosh.js":"../../node_modules/core-js/modules/es6.math.acosh.js","core-js/modules/es6.math.asinh.js":"../../node_modules/core-js/modules/es6.math.asinh.js","core-js/modules/es6.math.atanh.js":"../../node_modules/core-js/modules/es6.math.atanh.js","core-js/modules/es6.math.cbrt.js":"../../node_modules/core-js/modules/es6.math.cbrt.js","core-js/modules/es6.math.clz32.js":"../../node_modules/core-js/modules/es6.math.clz32.js","core-js/modules/es6.math.cosh.js":"../../node_modules/core-js/modules/es6.math.cosh.js","core-js/modules/es6.math.expm1.js":"../../node_modules/core-js/modules/es6.math.expm1.js","core-js/modules/es6.math.fround.js":"../../node_modules/core-js/modules/es6.math.fround.js","core-js/modules/es6.math.hypot.js":"../../node_modules/core-js/modules/es6.math.hypot.js","core-js/modules/es6.math.imul.js":"../../node_modules/core-js/modules/es6.math.imul.js","core-js/modules/es6.math.log1p.js":"../../node_modules/core-js/modules/es6.math.log1p.js","core-js/modules/es6.math.log10.js":"../../node_modules/core-js/modules/es6.math.log10.js","core-js/modules/es6.math.log2.js":"../../node_modules/core-js/modules/es6.math.log2.js","core-js/modules/es6.math.sign.js":"../../node_modules/core-js/modules/es6.math.sign.js","core-js/modules/es6.math.sinh.js":"../../node_modules/core-js/modules/es6.math.sinh.js","core-js/modules/es6.math.tanh.js":"../../node_modules/core-js/modules/es6.math.tanh.js","core-js/modules/es6.math.trunc.js":"../../node_modules/core-js/modules/es6.math.trunc.js","core-js/modules/es6.number.constructor.js":"../../node_modules/core-js/modules/es6.number.constructor.js","core-js/modules/es6.number.epsilon.js":"../../node_modules/core-js/modules/es6.number.epsilon.js","core-js/modules/es6.number.is-finite.js":"../../node_modules/core-js/modules/es6.number.is-finite.js","core-js/modules/es6.number.is-integer.js":"../../node_modules/core-js/modules/es6.number.is-integer.js","core-js/modules/es6.number.is-nan.js":"../../node_modules/core-js/modules/es6.number.is-nan.js","core-js/modules/es6.number.is-safe-integer.js":"../../node_modules/core-js/modules/es6.number.is-safe-integer.js","core-js/modules/es6.number.max-safe-integer.js":"../../node_modules/core-js/modules/es6.number.max-safe-integer.js","core-js/modules/es6.number.min-safe-integer.js":"../../node_modules/core-js/modules/es6.number.min-safe-integer.js","core-js/modules/es6.number.parse-float.js":"../../node_modules/core-js/modules/es6.number.parse-float.js","core-js/modules/es6.number.parse-int.js":"../../node_modules/core-js/modules/es6.number.parse-int.js","core-js/modules/es6.object.assign.js":"../../node_modules/core-js/modules/es6.object.assign.js","core-js/modules/es7.object.define-getter.js":"../../node_modules/core-js/modules/es7.object.define-getter.js","core-js/modules/es7.object.define-setter.js":"../../node_modules/core-js/modules/es7.object.define-setter.js","core-js/modules/es7.object.entries.js":"../../node_modules/core-js/modules/es7.object.entries.js","core-js/modules/es6.object.freeze.js":"../../node_modules/core-js/modules/es6.object.freeze.js","core-js/modules/es6.object.get-own-property-descriptor.js":"../../node_modules/core-js/modules/es6.object.get-own-property-descriptor.js","core-js/modules/es7.object.get-own-property-descriptors.js":"../../node_modules/core-js/modules/es7.object.get-own-property-descriptors.js","core-js/modules/es6.object.get-own-property-names.js":"../../node_modules/core-js/modules/es6.object.get-own-property-names.js","core-js/modules/es6.object.get-prototype-of.js":"../../node_modules/core-js/modules/es6.object.get-prototype-of.js","core-js/modules/es7.object.lookup-getter.js":"../../node_modules/core-js/modules/es7.object.lookup-getter.js","core-js/modules/es7.object.lookup-setter.js":"../../node_modules/core-js/modules/es7.object.lookup-setter.js","core-js/modules/es6.object.prevent-extensions.js":"../../node_modules/core-js/modules/es6.object.prevent-extensions.js","core-js/modules/es6.object.to-string.js":"../../node_modules/core-js/modules/es6.object.to-string.js","core-js/modules/es6.object.is.js":"../../node_modules/core-js/modules/es6.object.is.js","core-js/modules/es6.object.is-frozen.js":"../../node_modules/core-js/modules/es6.object.is-frozen.js","core-js/modules/es6.object.is-sealed.js":"../../node_modules/core-js/modules/es6.object.is-sealed.js","core-js/modules/es6.object.is-extensible.js":"../../node_modules/core-js/modules/es6.object.is-extensible.js","core-js/modules/es6.object.keys.js":"../../node_modules/core-js/modules/es6.object.keys.js","core-js/modules/es6.object.seal.js":"../../node_modules/core-js/modules/es6.object.seal.js","core-js/modules/es7.object.values.js":"../../node_modules/core-js/modules/es7.object.values.js","core-js/modules/es6.promise.js":"../../node_modules/core-js/modules/es6.promise.js","core-js/modules/es7.promise.finally.js":"../../node_modules/core-js/modules/es7.promise.finally.js","core-js/modules/es6.reflect.apply.js":"../../node_modules/core-js/modules/es6.reflect.apply.js","core-js/modules/es6.reflect.construct.js":"../../node_modules/core-js/modules/es6.reflect.construct.js","core-js/modules/es6.reflect.define-property.js":"../../node_modules/core-js/modules/es6.reflect.define-property.js","core-js/modules/es6.reflect.delete-property.js":"../../node_modules/core-js/modules/es6.reflect.delete-property.js","core-js/modules/es6.reflect.get.js":"../../node_modules/core-js/modules/es6.reflect.get.js","core-js/modules/es6.reflect.get-own-property-descriptor.js":"../../node_modules/core-js/modules/es6.reflect.get-own-property-descriptor.js","core-js/modules/es6.reflect.get-prototype-of.js":"../../node_modules/core-js/modules/es6.reflect.get-prototype-of.js","core-js/modules/es6.reflect.has.js":"../../node_modules/core-js/modules/es6.reflect.has.js","core-js/modules/es6.reflect.is-extensible.js":"../../node_modules/core-js/modules/es6.reflect.is-extensible.js","core-js/modules/es6.reflect.own-keys.js":"../../node_modules/core-js/modules/es6.reflect.own-keys.js","core-js/modules/es6.reflect.prevent-extensions.js":"../../node_modules/core-js/modules/es6.reflect.prevent-extensions.js","core-js/modules/es6.reflect.set.js":"../../node_modules/core-js/modules/es6.reflect.set.js","core-js/modules/es6.reflect.set-prototype-of.js":"../../node_modules/core-js/modules/es6.reflect.set-prototype-of.js","core-js/modules/es6.regexp.constructor.js":"../../node_modules/core-js/modules/es6.regexp.constructor.js","core-js/modules/es6.regexp.flags.js":"../../node_modules/core-js/modules/es6.regexp.flags.js","core-js/modules/es6.regexp.match.js":"../../node_modules/core-js/modules/es6.regexp.match.js","core-js/modules/es6.regexp.replace.js":"../../node_modules/core-js/modules/es6.regexp.replace.js","core-js/modules/es6.regexp.split.js":"../../node_modules/core-js/modules/es6.regexp.split.js","core-js/modules/es6.regexp.search.js":"../../node_modules/core-js/modules/es6.regexp.search.js","core-js/modules/es6.regexp.to-string.js":"../../node_modules/core-js/modules/es6.regexp.to-string.js","core-js/modules/es6.set.js":"../../node_modules/core-js/modules/es6.set.js","core-js/modules/es6.symbol.js":"../../node_modules/core-js/modules/es6.symbol.js","core-js/modules/es7.symbol.async-iterator.js":"../../node_modules/core-js/modules/es7.symbol.async-iterator.js","core-js/modules/es6.string.anchor.js":"../../node_modules/core-js/modules/es6.string.anchor.js","core-js/modules/es6.string.big.js":"../../node_modules/core-js/modules/es6.string.big.js","core-js/modules/es6.string.blink.js":"../../node_modules/core-js/modules/es6.string.blink.js","core-js/modules/es6.string.bold.js":"../../node_modules/core-js/modules/es6.string.bold.js","core-js/modules/es6.string.code-point-at.js":"../../node_modules/core-js/modules/es6.string.code-point-at.js","core-js/modules/es6.string.ends-with.js":"../../node_modules/core-js/modules/es6.string.ends-with.js","core-js/modules/es6.string.fixed.js":"../../node_modules/core-js/modules/es6.string.fixed.js","core-js/modules/es6.string.fontcolor.js":"../../node_modules/core-js/modules/es6.string.fontcolor.js","core-js/modules/es6.string.fontsize.js":"../../node_modules/core-js/modules/es6.string.fontsize.js","core-js/modules/es6.string.from-code-point.js":"../../node_modules/core-js/modules/es6.string.from-code-point.js","core-js/modules/es6.string.includes.js":"../../node_modules/core-js/modules/es6.string.includes.js","core-js/modules/es6.string.italics.js":"../../node_modules/core-js/modules/es6.string.italics.js","core-js/modules/es6.string.iterator.js":"../../node_modules/core-js/modules/es6.string.iterator.js","core-js/modules/es6.string.link.js":"../../node_modules/core-js/modules/es6.string.link.js","core-js/modules/es7.string.pad-start.js":"../../node_modules/core-js/modules/es7.string.pad-start.js","core-js/modules/es7.string.pad-end.js":"../../node_modules/core-js/modules/es7.string.pad-end.js","core-js/modules/es6.string.raw.js":"../../node_modules/core-js/modules/es6.string.raw.js","core-js/modules/es6.string.repeat.js":"../../node_modules/core-js/modules/es6.string.repeat.js","core-js/modules/es6.string.small.js":"../../node_modules/core-js/modules/es6.string.small.js","core-js/modules/es6.string.starts-with.js":"../../node_modules/core-js/modules/es6.string.starts-with.js","core-js/modules/es6.string.strike.js":"../../node_modules/core-js/modules/es6.string.strike.js","core-js/modules/es6.string.sub.js":"../../node_modules/core-js/modules/es6.string.sub.js","core-js/modules/es6.string.sup.js":"../../node_modules/core-js/modules/es6.string.sup.js","core-js/modules/es7.string.trim-left.js":"../../node_modules/core-js/modules/es7.string.trim-left.js","core-js/modules/es7.string.trim-right.js":"../../node_modules/core-js/modules/es7.string.trim-right.js","core-js/modules/es6.typed.array-buffer.js":"../../node_modules/core-js/modules/es6.typed.array-buffer.js","core-js/modules/es6.typed.int8-array.js":"../../node_modules/core-js/modules/es6.typed.int8-array.js","core-js/modules/es6.typed.uint8-array.js":"../../node_modules/core-js/modules/es6.typed.uint8-array.js","core-js/modules/es6.typed.uint8-clamped-array.js":"../../node_modules/core-js/modules/es6.typed.uint8-clamped-array.js","core-js/modules/es6.typed.int16-array.js":"../../node_modules/core-js/modules/es6.typed.int16-array.js","core-js/modules/es6.typed.uint16-array.js":"../../node_modules/core-js/modules/es6.typed.uint16-array.js","core-js/modules/es6.typed.int32-array.js":"../../node_modules/core-js/modules/es6.typed.int32-array.js","core-js/modules/es6.typed.uint32-array.js":"../../node_modules/core-js/modules/es6.typed.uint32-array.js","core-js/modules/es6.typed.float32-array.js":"../../node_modules/core-js/modules/es6.typed.float32-array.js","core-js/modules/es6.typed.float64-array.js":"../../node_modules/core-js/modules/es6.typed.float64-array.js","core-js/modules/es6.weak-map.js":"../../node_modules/core-js/modules/es6.weak-map.js","core-js/modules/es6.weak-set.js":"../../node_modules/core-js/modules/es6.weak-set.js","core-js/modules/web.timers.js":"../../node_modules/core-js/modules/web.timers.js","core-js/modules/web.immediate.js":"../../node_modules/core-js/modules/web.immediate.js","core-js/modules/web.dom.iterable.js":"../../node_modules/core-js/modules/web.dom.iterable.js","regenerator-runtime/runtime.js":"../../node_modules/regenerator-runtime/runtime.js","./login":"login.js","./mapbox":"mapbox.js","./updateSettings":"updateSettings.js","./stripe":"stripe.js","./alert":"alert.js","./signup":"signup.js","./createReview":"createReview.js"}],"../../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+
+if (addUserBtn) {
+  addUserBtn.addEventListener('click', function () {
+    toggleForm('show');
+    addUserForm.classList.remove('hidden');
+    var saveBtn = addUserForm.querySelector('#add-user');
+
+    if (saveBtn) {
+      saveBtn.addEventListener('click', /*#__PURE__*/function () {
+        var _ref4 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee4(e) {
+          var data;
+          return regeneratorRuntime.wrap(function _callee4$(_context4) {
+            while (1) {
+              switch (_context4.prev = _context4.next) {
+                case 0:
+                  e.preventDefault();
+                  e.target.textContent = 'Processing...';
+                  e.target.style.backgroundColor = '#555555';
+                  data = {
+                    name: addUserForm.querySelector('#name').value,
+                    email: addUserForm.querySelector('#email').value,
+                    role: addUserForm.querySelector('#role').value
+                  };
+                  _context4.next = 6;
+                  return (0, _manipulateUser.addUser)(data);
+
+                case 6:
+                  e.target.textContent = 'SAVE';
+                  e.target.style.backgroundColor = '#55c57a';
+
+                case 8:
+                case "end":
+                  return _context4.stop();
+              }
+            }
+          }, _callee4);
+        }));
+
+        return function (_x4) {
+          return _ref4.apply(this, arguments);
+        };
+      }());
+    }
+  });
+} // Handle edit/delete user
+
+
+var userTable = document.querySelector('.user-management');
+if (userTable) userTable.addEventListener('click', function (e) {
+  var editBtn = e.target.closest('.edit-btn');
+  var deleteBtn = e.target.closest('.delete-btn');
+
+  if (editBtn) {
+    console.dir(editUserForm);
+    var user = JSON.parse(editBtn.dataset.user);
+    editUserForm.querySelector('#nameU').value = user.name;
+    editUserForm.querySelector('#emailU').value = user.email;
+    editUserForm.querySelector('#roleU').value = user.role;
+    editUserForm.classList.remove('hidden');
+    overlay.classList.remove('hidden');
+    var saveBtn = editUserForm.querySelector('#update-user');
+    saveBtn.addEventListener('click', /*#__PURE__*/function () {
+      var _ref5 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee5(e) {
+        var data;
+        return regeneratorRuntime.wrap(function _callee5$(_context5) {
+          while (1) {
+            switch (_context5.prev = _context5.next) {
+              case 0:
+                e.preventDefault();
+                e.target.textContent = 'Processing...';
+                e.target.style.backgroundColor = '#555555';
+                data = {
+                  role: editUserForm.querySelector('#roleU').value
+                };
+                _context5.next = 6;
+                return (0, _manipulateUser.updateUser)(data, user._id);
+
+              case 6:
+                e.target.textContent = 'SAVE';
+                e.target.style.backgroundColor = '#55c57a';
+
+              case 8:
+              case "end":
+                return _context5.stop();
+            }
+          }
+        }, _callee5);
+      }));
+
+      return function (_x5) {
+        return _ref5.apply(this, arguments);
+      };
+    }());
+  }
+
+  if (deleteBtn) {
+    var userId = deleteBtn.dataset.userId;
+    console.log(userId);
+    confirmBox.classList.remove('hidden');
+    overlay.classList.remove('hidden');
+    var cancel = document.getElementById('cancel');
+    var confirm = document.getElementById('confirm');
+    cancel.addEventListener('click', function () {
+      return toggleForm('hide');
+    });
+    confirm.addEventListener('click', function () {
+      return (0, _manipulateUser.deleteUser)(userId);
+    });
+  }
+});
+searchInput.addEventListener('submit', function (e) {
+  e.preventDefault();
+  var key = e.target.querySelector('.search_box_input').value.trim();
+  window.location.replace("/search/".concat(key));
+});
+
+if (showAddFormBtn) {
+  showAddFormBtn.addEventListener('click', function (e) {
+    toggleForm('show');
+    addTourBtn.classList.remove('hidden');
+    updateTourBtn.classList.add('hidden');
+
+    if (tourForm) {
+      tourForm.querySelector('#tourName').value = '';
+      tourForm.querySelector('#duration').value = '';
+      tourForm.querySelector('#maxGroupSize').value = '';
+      tourForm.querySelector('#difficulty').value = '';
+      tourForm.querySelector('#ratingsAverage').value = '';
+      tourForm.querySelector('#ratingsQuantity').value = '';
+      tourForm.querySelector('#price').value = '';
+      tourForm.querySelector('#summary').value = '';
+      tourForm.querySelector('#description').value = '';
+      tourForm.querySelector('#startCoordinate').value = '';
+      tourForm.querySelector('#startAddress').value = '';
+      tourForm.querySelector('#startDescription').value = '';
+      tourForm.querySelector('#guide1').value = '';
+      tourForm.querySelector('#guide2').value = '';
+      tourForm.querySelector('#guide3').value = '';
+      tourForm.querySelector('#locationCoordinate1').value = '';
+      tourForm.querySelector('#locationDescription1').value = '';
+      tourForm.querySelector('#locationCoordinate2').value = '';
+      tourForm.querySelector('#locationDescription2').value = '';
+      tourForm.querySelector('#locationCoordinate3').value = '';
+      tourForm.querySelector('#locationDescription3').value = '';
+    }
+  });
+}
+
+if (addTourBtn) {
+  addTourBtn.addEventListener('click', /*#__PURE__*/function () {
+    var _ref6 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee6(e) {
+      var form, startDates, i, guides, startLocation, locations;
+      return regeneratorRuntime.wrap(function _callee6$(_context6) {
+        while (1) {
+          switch (_context6.prev = _context6.next) {
+            case 0:
+              e.preventDefault();
+              form = new FormData();
+              form.append('name', tourForm.querySelector('#tourName').value);
+              console.log(tourForm.querySelector('#tourName').value);
+              form.append('duration', tourForm.querySelector('#duration').value);
+              form.append('maxGroupSize', tourForm.querySelector('#maxGroupSize').value);
+              form.append('difficulty', tourForm.querySelector('#difficulty').value);
+              form.append('price', tourForm.querySelector('#price').value);
+              form.append('summary', tourForm.querySelector('#summary').value);
+              form.append('description', tourForm.querySelector('#description').value);
+              form.append('imageCover', tourForm.querySelector('#imageCover').files[0]);
+              form.append('ratingsAverage', tourForm.querySelector('#ratingsAverage').value);
+              form.append('ratingsQuantity', tourForm.querySelector('#ratingsQuantity').value);
+              startDates = [];
+
+              for (i = 0; i < 3; i++) {
+                form.append('images', tourForm.querySelector("#image".concat(i + 1)).files[0]);
+                startDates.push(new Date(tourForm.querySelector("#startDate".concat(i + 1)).value).toISOString());
+                console.log(tourForm.querySelector("#startDate".concat(i + 1)).value);
+              }
+
+              guides = [tourForm.querySelector('#guide1').value, tourForm.querySelector('#guide2').value, tourForm.querySelector('#guide3').value];
+              form.append('guides', JSON.stringify(guides));
+              form.append('startDates', JSON.stringify(startDates));
+              startLocation = JSON.stringify({
+                description: tourForm.querySelector('#startDescription').value,
+                type: 'Point',
+                coordinates: tourForm.querySelector('#startCoordinate').value.split(','),
+                address: tourForm.querySelector('#startAddress').value
+              });
+              console.log(startLocation);
+              locations = JSON.stringify([{
+                description: tourForm.querySelector('#locationDescription1').value,
+                type: 'Point',
+                coordinates: tourForm.querySelector('#locationCoordinate1').value.split(',')
+              }, {
+                description: tourForm.querySelector('#locationDescription2').value,
+                type: 'Point',
+                coordinates: tourForm.querySelector('#locationCoordinate2').value.split(',')
+              }, {
+                description: tourForm.querySelector('#locationDescription3').value,
+                type: 'Point',
+                coordinates: tourForm.querySelector('#locationCoordinate3').value.split(',')
+              }]);
+              form.append('startLocation', startLocation);
+              form.append('locations', locations);
+              (0, _manipulateTour.manipulateTour)(form);
+
+            case 24:
+            case "end":
+              return _context6.stop();
+          }
+        }
+      }, _callee6);
+    }));
+
+    return function (_x6) {
+      return _ref6.apply(this, arguments);
+    };
+  }());
+}
+
+if (updateTourBtn) {
+  updateTourBtn.addEventListener('click', function (e) {
+    e.preventDefault();
+    var form = new FormData();
+    form.append('name', tourForm.querySelector('#tourName').value);
+    console.log(tourForm.querySelector('#tourName').value);
+    form.append('duration', tourForm.querySelector('#duration').value);
+    form.append('maxGroupSize', tourForm.querySelector('#maxGroupSize').value);
+    form.append('difficulty', tourForm.querySelector('#difficulty').value);
+    form.append('price', tourForm.querySelector('#price').value);
+    form.append('summary', tourForm.querySelector('#summary').value);
+    console.log(tourForm.querySelector('#summary').value);
+    form.append('description', tourForm.querySelector('#description').value);
+    form.append('imageCover', tourForm.querySelector('#imageCover').files[0]);
+    form.append('ratingsAverage', tourForm.querySelector('#ratingsAverage').value);
+    form.append('ratingsQuantity', tourForm.querySelector('#ratingsQuantity').value);
+    var startDates = [];
+
+    for (var i = 0; i < 3; i++) {
+      form.append('images', tourForm.querySelector("#image".concat(i + 1)).files[0]);
+      startDates.push(new Date(tourForm.querySelector("#startDate".concat(i + 1)).value).toISOString());
+    }
+
+    var guides = [tourForm.querySelector('#guide1').value, tourForm.querySelector('#guide2').value, tourForm.querySelector('#guide3').value];
+    form.append('guides', JSON.stringify(guides));
+    form.append('startDates', JSON.stringify(startDates));
+    var startLocation = JSON.stringify({
+      description: tourForm.querySelector('#startDescription').value,
+      type: 'Point',
+      coordinates: tourForm.querySelector('#startCoordinate').value.split(','),
+      address: tourForm.querySelector('#startAddress').value
+    });
+    console.log(startLocation);
+    var locations = JSON.stringify([{
+      description: tourForm.querySelector('#locationDescription1').value,
+      type: 'Point',
+      coordinates: tourForm.querySelector('#locationCoordinate1').value.split(',')
+    }, {
+      description: tourForm.querySelector('#locationDescription2').value,
+      type: 'Point',
+      coordinates: tourForm.querySelector('#locationCoordinate2').value.split(',')
+    }, {
+      description: tourForm.querySelector('#locationDescription3').value,
+      type: 'Point',
+      coordinates: tourForm.querySelector('#locationCoordinate3').value.split(',')
+    }]);
+    form.append('startLocation', startLocation);
+    form.append('locations', locations);
+    (0, _manipulateTour.manipulateTour)(form, editTourId);
+  });
+}
+},{"core-js/modules/es6.array.copy-within.js":"../../node_modules/core-js/modules/es6.array.copy-within.js","core-js/modules/es6.array.fill.js":"../../node_modules/core-js/modules/es6.array.fill.js","core-js/modules/es6.array.filter.js":"../../node_modules/core-js/modules/es6.array.filter.js","core-js/modules/es6.array.find.js":"../../node_modules/core-js/modules/es6.array.find.js","core-js/modules/es6.array.find-index.js":"../../node_modules/core-js/modules/es6.array.find-index.js","core-js/modules/es7.array.flat-map.js":"../../node_modules/core-js/modules/es7.array.flat-map.js","core-js/modules/es6.array.from.js":"../../node_modules/core-js/modules/es6.array.from.js","core-js/modules/es7.array.includes.js":"../../node_modules/core-js/modules/es7.array.includes.js","core-js/modules/es6.array.iterator.js":"../../node_modules/core-js/modules/es6.array.iterator.js","core-js/modules/es6.array.map.js":"../../node_modules/core-js/modules/es6.array.map.js","core-js/modules/es6.array.of.js":"../../node_modules/core-js/modules/es6.array.of.js","core-js/modules/es6.array.slice.js":"../../node_modules/core-js/modules/es6.array.slice.js","core-js/modules/es6.array.species.js":"../../node_modules/core-js/modules/es6.array.species.js","core-js/modules/es6.date.to-primitive.js":"../../node_modules/core-js/modules/es6.date.to-primitive.js","core-js/modules/es6.function.has-instance.js":"../../node_modules/core-js/modules/es6.function.has-instance.js","core-js/modules/es6.function.name.js":"../../node_modules/core-js/modules/es6.function.name.js","core-js/modules/es6.map.js":"../../node_modules/core-js/modules/es6.map.js","core-js/modules/es6.math.acosh.js":"../../node_modules/core-js/modules/es6.math.acosh.js","core-js/modules/es6.math.asinh.js":"../../node_modules/core-js/modules/es6.math.asinh.js","core-js/modules/es6.math.atanh.js":"../../node_modules/core-js/modules/es6.math.atanh.js","core-js/modules/es6.math.cbrt.js":"../../node_modules/core-js/modules/es6.math.cbrt.js","core-js/modules/es6.math.clz32.js":"../../node_modules/core-js/modules/es6.math.clz32.js","core-js/modules/es6.math.cosh.js":"../../node_modules/core-js/modules/es6.math.cosh.js","core-js/modules/es6.math.expm1.js":"../../node_modules/core-js/modules/es6.math.expm1.js","core-js/modules/es6.math.fround.js":"../../node_modules/core-js/modules/es6.math.fround.js","core-js/modules/es6.math.hypot.js":"../../node_modules/core-js/modules/es6.math.hypot.js","core-js/modules/es6.math.imul.js":"../../node_modules/core-js/modules/es6.math.imul.js","core-js/modules/es6.math.log1p.js":"../../node_modules/core-js/modules/es6.math.log1p.js","core-js/modules/es6.math.log10.js":"../../node_modules/core-js/modules/es6.math.log10.js","core-js/modules/es6.math.log2.js":"../../node_modules/core-js/modules/es6.math.log2.js","core-js/modules/es6.math.sign.js":"../../node_modules/core-js/modules/es6.math.sign.js","core-js/modules/es6.math.sinh.js":"../../node_modules/core-js/modules/es6.math.sinh.js","core-js/modules/es6.math.tanh.js":"../../node_modules/core-js/modules/es6.math.tanh.js","core-js/modules/es6.math.trunc.js":"../../node_modules/core-js/modules/es6.math.trunc.js","core-js/modules/es6.number.constructor.js":"../../node_modules/core-js/modules/es6.number.constructor.js","core-js/modules/es6.number.epsilon.js":"../../node_modules/core-js/modules/es6.number.epsilon.js","core-js/modules/es6.number.is-finite.js":"../../node_modules/core-js/modules/es6.number.is-finite.js","core-js/modules/es6.number.is-integer.js":"../../node_modules/core-js/modules/es6.number.is-integer.js","core-js/modules/es6.number.is-nan.js":"../../node_modules/core-js/modules/es6.number.is-nan.js","core-js/modules/es6.number.is-safe-integer.js":"../../node_modules/core-js/modules/es6.number.is-safe-integer.js","core-js/modules/es6.number.max-safe-integer.js":"../../node_modules/core-js/modules/es6.number.max-safe-integer.js","core-js/modules/es6.number.min-safe-integer.js":"../../node_modules/core-js/modules/es6.number.min-safe-integer.js","core-js/modules/es6.number.parse-float.js":"../../node_modules/core-js/modules/es6.number.parse-float.js","core-js/modules/es6.number.parse-int.js":"../../node_modules/core-js/modules/es6.number.parse-int.js","core-js/modules/es6.object.assign.js":"../../node_modules/core-js/modules/es6.object.assign.js","core-js/modules/es7.object.define-getter.js":"../../node_modules/core-js/modules/es7.object.define-getter.js","core-js/modules/es7.object.define-setter.js":"../../node_modules/core-js/modules/es7.object.define-setter.js","core-js/modules/es7.object.entries.js":"../../node_modules/core-js/modules/es7.object.entries.js","core-js/modules/es6.object.freeze.js":"../../node_modules/core-js/modules/es6.object.freeze.js","core-js/modules/es6.object.get-own-property-descriptor.js":"../../node_modules/core-js/modules/es6.object.get-own-property-descriptor.js","core-js/modules/es7.object.get-own-property-descriptors.js":"../../node_modules/core-js/modules/es7.object.get-own-property-descriptors.js","core-js/modules/es6.object.get-own-property-names.js":"../../node_modules/core-js/modules/es6.object.get-own-property-names.js","core-js/modules/es6.object.get-prototype-of.js":"../../node_modules/core-js/modules/es6.object.get-prototype-of.js","core-js/modules/es7.object.lookup-getter.js":"../../node_modules/core-js/modules/es7.object.lookup-getter.js","core-js/modules/es7.object.lookup-setter.js":"../../node_modules/core-js/modules/es7.object.lookup-setter.js","core-js/modules/es6.object.prevent-extensions.js":"../../node_modules/core-js/modules/es6.object.prevent-extensions.js","core-js/modules/es6.object.to-string.js":"../../node_modules/core-js/modules/es6.object.to-string.js","core-js/modules/es6.object.is.js":"../../node_modules/core-js/modules/es6.object.is.js","core-js/modules/es6.object.is-frozen.js":"../../node_modules/core-js/modules/es6.object.is-frozen.js","core-js/modules/es6.object.is-sealed.js":"../../node_modules/core-js/modules/es6.object.is-sealed.js","core-js/modules/es6.object.is-extensible.js":"../../node_modules/core-js/modules/es6.object.is-extensible.js","core-js/modules/es6.object.keys.js":"../../node_modules/core-js/modules/es6.object.keys.js","core-js/modules/es6.object.seal.js":"../../node_modules/core-js/modules/es6.object.seal.js","core-js/modules/es7.object.values.js":"../../node_modules/core-js/modules/es7.object.values.js","core-js/modules/es6.promise.js":"../../node_modules/core-js/modules/es6.promise.js","core-js/modules/es7.promise.finally.js":"../../node_modules/core-js/modules/es7.promise.finally.js","core-js/modules/es6.reflect.apply.js":"../../node_modules/core-js/modules/es6.reflect.apply.js","core-js/modules/es6.reflect.construct.js":"../../node_modules/core-js/modules/es6.reflect.construct.js","core-js/modules/es6.reflect.define-property.js":"../../node_modules/core-js/modules/es6.reflect.define-property.js","core-js/modules/es6.reflect.delete-property.js":"../../node_modules/core-js/modules/es6.reflect.delete-property.js","core-js/modules/es6.reflect.get.js":"../../node_modules/core-js/modules/es6.reflect.get.js","core-js/modules/es6.reflect.get-own-property-descriptor.js":"../../node_modules/core-js/modules/es6.reflect.get-own-property-descriptor.js","core-js/modules/es6.reflect.get-prototype-of.js":"../../node_modules/core-js/modules/es6.reflect.get-prototype-of.js","core-js/modules/es6.reflect.has.js":"../../node_modules/core-js/modules/es6.reflect.has.js","core-js/modules/es6.reflect.is-extensible.js":"../../node_modules/core-js/modules/es6.reflect.is-extensible.js","core-js/modules/es6.reflect.own-keys.js":"../../node_modules/core-js/modules/es6.reflect.own-keys.js","core-js/modules/es6.reflect.prevent-extensions.js":"../../node_modules/core-js/modules/es6.reflect.prevent-extensions.js","core-js/modules/es6.reflect.set.js":"../../node_modules/core-js/modules/es6.reflect.set.js","core-js/modules/es6.reflect.set-prototype-of.js":"../../node_modules/core-js/modules/es6.reflect.set-prototype-of.js","core-js/modules/es6.regexp.constructor.js":"../../node_modules/core-js/modules/es6.regexp.constructor.js","core-js/modules/es6.regexp.flags.js":"../../node_modules/core-js/modules/es6.regexp.flags.js","core-js/modules/es6.regexp.match.js":"../../node_modules/core-js/modules/es6.regexp.match.js","core-js/modules/es6.regexp.replace.js":"../../node_modules/core-js/modules/es6.regexp.replace.js","core-js/modules/es6.regexp.split.js":"../../node_modules/core-js/modules/es6.regexp.split.js","core-js/modules/es6.regexp.search.js":"../../node_modules/core-js/modules/es6.regexp.search.js","core-js/modules/es6.regexp.to-string.js":"../../node_modules/core-js/modules/es6.regexp.to-string.js","core-js/modules/es6.set.js":"../../node_modules/core-js/modules/es6.set.js","core-js/modules/es6.symbol.js":"../../node_modules/core-js/modules/es6.symbol.js","core-js/modules/es7.symbol.async-iterator.js":"../../node_modules/core-js/modules/es7.symbol.async-iterator.js","core-js/modules/es6.string.anchor.js":"../../node_modules/core-js/modules/es6.string.anchor.js","core-js/modules/es6.string.big.js":"../../node_modules/core-js/modules/es6.string.big.js","core-js/modules/es6.string.blink.js":"../../node_modules/core-js/modules/es6.string.blink.js","core-js/modules/es6.string.bold.js":"../../node_modules/core-js/modules/es6.string.bold.js","core-js/modules/es6.string.code-point-at.js":"../../node_modules/core-js/modules/es6.string.code-point-at.js","core-js/modules/es6.string.ends-with.js":"../../node_modules/core-js/modules/es6.string.ends-with.js","core-js/modules/es6.string.fixed.js":"../../node_modules/core-js/modules/es6.string.fixed.js","core-js/modules/es6.string.fontcolor.js":"../../node_modules/core-js/modules/es6.string.fontcolor.js","core-js/modules/es6.string.fontsize.js":"../../node_modules/core-js/modules/es6.string.fontsize.js","core-js/modules/es6.string.from-code-point.js":"../../node_modules/core-js/modules/es6.string.from-code-point.js","core-js/modules/es6.string.includes.js":"../../node_modules/core-js/modules/es6.string.includes.js","core-js/modules/es6.string.italics.js":"../../node_modules/core-js/modules/es6.string.italics.js","core-js/modules/es6.string.iterator.js":"../../node_modules/core-js/modules/es6.string.iterator.js","core-js/modules/es6.string.link.js":"../../node_modules/core-js/modules/es6.string.link.js","core-js/modules/es7.string.pad-start.js":"../../node_modules/core-js/modules/es7.string.pad-start.js","core-js/modules/es7.string.pad-end.js":"../../node_modules/core-js/modules/es7.string.pad-end.js","core-js/modules/es6.string.raw.js":"../../node_modules/core-js/modules/es6.string.raw.js","core-js/modules/es6.string.repeat.js":"../../node_modules/core-js/modules/es6.string.repeat.js","core-js/modules/es6.string.small.js":"../../node_modules/core-js/modules/es6.string.small.js","core-js/modules/es6.string.starts-with.js":"../../node_modules/core-js/modules/es6.string.starts-with.js","core-js/modules/es6.string.strike.js":"../../node_modules/core-js/modules/es6.string.strike.js","core-js/modules/es6.string.sub.js":"../../node_modules/core-js/modules/es6.string.sub.js","core-js/modules/es6.string.sup.js":"../../node_modules/core-js/modules/es6.string.sup.js","core-js/modules/es7.string.trim-left.js":"../../node_modules/core-js/modules/es7.string.trim-left.js","core-js/modules/es7.string.trim-right.js":"../../node_modules/core-js/modules/es7.string.trim-right.js","core-js/modules/es6.typed.array-buffer.js":"../../node_modules/core-js/modules/es6.typed.array-buffer.js","core-js/modules/es6.typed.int8-array.js":"../../node_modules/core-js/modules/es6.typed.int8-array.js","core-js/modules/es6.typed.uint8-array.js":"../../node_modules/core-js/modules/es6.typed.uint8-array.js","core-js/modules/es6.typed.uint8-clamped-array.js":"../../node_modules/core-js/modules/es6.typed.uint8-clamped-array.js","core-js/modules/es6.typed.int16-array.js":"../../node_modules/core-js/modules/es6.typed.int16-array.js","core-js/modules/es6.typed.uint16-array.js":"../../node_modules/core-js/modules/es6.typed.uint16-array.js","core-js/modules/es6.typed.int32-array.js":"../../node_modules/core-js/modules/es6.typed.int32-array.js","core-js/modules/es6.typed.uint32-array.js":"../../node_modules/core-js/modules/es6.typed.uint32-array.js","core-js/modules/es6.typed.float32-array.js":"../../node_modules/core-js/modules/es6.typed.float32-array.js","core-js/modules/es6.typed.float64-array.js":"../../node_modules/core-js/modules/es6.typed.float64-array.js","core-js/modules/es6.weak-map.js":"../../node_modules/core-js/modules/es6.weak-map.js","core-js/modules/es6.weak-set.js":"../../node_modules/core-js/modules/es6.weak-set.js","core-js/modules/web.timers.js":"../../node_modules/core-js/modules/web.timers.js","core-js/modules/web.immediate.js":"../../node_modules/core-js/modules/web.immediate.js","core-js/modules/web.dom.iterable.js":"../../node_modules/core-js/modules/web.dom.iterable.js","regenerator-runtime/runtime.js":"../../node_modules/regenerator-runtime/runtime.js","./login":"login.js","./mapbox":"mapbox.js","./updateSettings":"updateSettings.js","./stripe":"stripe.js","./alert":"alert.js","./signup":"signup.js","./createReview":"createReview.js","./manipulateUser":"manipulateUser.js","./manipulateTour":"manipulateTour.js"}],"../../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -9738,7 +10341,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "54484" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "59011" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

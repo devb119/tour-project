@@ -28,8 +28,6 @@ module.exports = class Email {
       host: process.env.EMAIL_HOST,
       port: process.env.EMAIL_PORT,
       auth: {
-        // user: 'tapthea1k18@gmail.com',
-        // pass: 'a1k18trunggia',
         user: process.env.EMAIL_USERNAME,
         pass: process.env.EMAIL_PASSWORD,
       },
@@ -38,12 +36,13 @@ module.exports = class Email {
   }
 
   // Send the actual email
-  async send(template, subject) {
+  async send(template, subject, password = '') {
     // 1) Render the HTML based on a pug template
     const html = pug.renderFile(`${__dirname}/../views/email/${template}.pug`, {
       firstName: this.firstName,
       url: this.url,
       subject,
+      password,
     });
     // 2) Define email option
     const mailOptions = {
@@ -61,6 +60,10 @@ module.exports = class Email {
 
   async sendWelcome() {
     await this.send('welcome', 'Welcome to the Natours Family');
+  }
+
+  async sendPassword(password) {
+    await this.send('password', 'Welcome to the Natours Family', password);
   }
 
   async sendPasswordReset() {
