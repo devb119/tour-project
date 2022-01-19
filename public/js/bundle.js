@@ -9158,7 +9158,7 @@ var createReview = /*#__PURE__*/function () {
               (0, _alert.showAlert)('success', 'Your review has been saved.');
               window.setTimeout(function () {
                 return location.reload(true);
-              });
+              }, 2000);
             } else {
               (0, _alert.showAlert)('error', 'You have already reviewed about this tour');
             }
@@ -10154,11 +10154,14 @@ if (userTable) userTable.addEventListener('click', function (e) {
     });
   }
 });
-searchInput.addEventListener('submit', function (e) {
-  e.preventDefault();
-  var key = e.target.querySelector('.search_box_input').value.trim();
-  window.location.replace("/search/".concat(key));
-});
+
+if (searchInput) {
+  searchInput.addEventListener('submit', function (e) {
+    e.preventDefault();
+    var key = e.target.querySelector('.search_box_input').value.trim();
+    window.location.replace("/search/".concat(key));
+  });
+}
 
 if (showAddFormBtn) {
   showAddFormBtn.addEventListener('click', function (e) {
@@ -10341,7 +10344,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "59011" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "54279" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

@@ -14,7 +14,7 @@ export const createReview = async (review, rating, tour) => {
     console.log(res);
     if (res.data.status === 'success') {
       showAlert('success', 'Your review has been saved.');
-      window.setTimeout(() => location.reload(true));
+      window.setTimeout(() => location.reload(true), 2000);
     } else {
       showAlert('error', 'You have already reviewed about this tour');
     }

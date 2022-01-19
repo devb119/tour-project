@@ -314,11 +314,13 @@ if (userTable)
     }
   });
 
-searchInput.addEventListener('submit', function (e) {
-  e.preventDefault();
-  const key = e.target.querySelector('.search_box_input').value.trim();
-  window.location.replace(`/search/${key}`);
-});
+if (searchInput) {
+  searchInput.addEventListener('submit', function (e) {
+    e.preventDefault();
+    const key = e.target.querySelector('.search_box_input').value.trim();
+    window.location.replace(`/search/${key}`);
+  });
+}
 
 if (showAddFormBtn) {
   showAddFormBtn.addEventListener('click', (e) => {

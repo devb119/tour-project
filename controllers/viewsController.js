@@ -28,7 +28,6 @@ exports.searchTour = catchAsync(async (req, res, next) => {
   const tours = await Tour.find({
     name: { $regex: req.params.key, $options: 'i' },
   });
-  console.log(req.params.key, tours);
   res.status(200).render('overview', {
     title: Tour,
     tours,

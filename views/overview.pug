@@ -2,6 +2,10 @@ extends base
 
 block content 
   main.main 
+    .search_box_container
+      .search_box.search_box_over
+        input.search_box_input(type='text', placeholder='search...')
+        i.fas.fa-search
     if update
       btn.btn.btn--green#add-tour-btn Add Tour
     .card-container
