@@ -35,7 +35,8 @@ const editUserForm = document.querySelector('#edit-user-form');
 const addUserForm = document.querySelector('#add-user-form');
 const addUserBtn = document.querySelector('#addNewUser');
 const confirmBox = document.querySelector('.confirm_box');
-const searchInput = document.querySelector('.search_box');
+const searchTourInput = document.querySelector('#search-tour');
+const searchUserInput = document.querySelector('#search-user');
 
 // TOUR
 const showAddFormBtn = document.getElementById('add-tour-btn');
@@ -314,11 +315,20 @@ if (userTable)
     }
   });
 
-if (searchInput) {
-  searchInput.addEventListener('submit', function (e) {
+if (searchTourInput) {
+  searchTourInput.addEventListener('submit', function (e) {
     e.preventDefault();
     const key = e.target.querySelector('.search_box_input').value.trim();
+    console.log(key);
     window.location.replace(`/search/${key}`);
+  });
+}
+
+if (searchUserInput) {
+  searchUserInput.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const key = e.target.querySelector('.search_box_input').value;
+    window.location.replace(`/user/${key}`);
   });
 }
 

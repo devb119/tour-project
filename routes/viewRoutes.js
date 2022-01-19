@@ -38,6 +38,13 @@ router.get(
 );
 
 router.get(
+  '/user/:key',
+  authController.protect,
+  authController.restrictTo('admin'),
+  viewsController.searchUser
+);
+
+router.get(
   '/tour-mng',
   authController.protect,
   authController.restrictTo('admin'),

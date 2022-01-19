@@ -9777,7 +9777,8 @@ var editUserForm = document.querySelector('#edit-user-form');
 var addUserForm = document.querySelector('#add-user-form');
 var addUserBtn = document.querySelector('#addNewUser');
 var confirmBox = document.querySelector('.confirm_box');
-var searchInput = document.querySelector('.search_box'); // TOUR
+var searchTourInput = document.querySelector('#search-tour');
+var searchUserInput = document.querySelector('#search-user'); // TOUR
 
 var showAddFormBtn = document.getElementById('add-tour-btn');
 var addTourBtn = document.querySelector('#add-tour');
@@ -10155,11 +10156,20 @@ if (userTable) userTable.addEventListener('click', function (e) {
   }
 });
 
-if (searchInput) {
-  searchInput.addEventListener('submit', function (e) {
+if (searchTourInput) {
+  searchTourInput.addEventListener('submit', function (e) {
     e.preventDefault();
     var key = e.target.querySelector('.search_box_input').value.trim();
+    console.log(key);
     window.location.replace("/search/".concat(key));
+  });
+}
+
+if (searchUserInput) {
+  searchUserInput.addEventListener('submit', function (e) {
+    e.preventDefault();
+    var key = e.target.querySelector('.search_box_input').value;
+    window.location.replace("/user/".concat(key));
   });
 }
 
@@ -10344,7 +10354,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "54279" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "60968" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

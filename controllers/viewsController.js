@@ -95,23 +95,35 @@ exports.getMyTours = catchAsync(async (req, res, next) => {
   });
 });
 
-exports.updateUserData = catchAsync(async (req, res, next) => {
-  const updatedUser = await User.findByIdAndUpdate(
-    req.user.id,
-    {
-      name: req.body.name,
-      email: req.body.email,
-    },
-    { new: true, runValidators: true }
-  );
-  res.status(200).render('account', {
-    title: 'Your account',
-    user: updatedUser,
+// exports.updateUserData = catchAsync(async (req, res, next) => {
+//   const updatedUser = await User.findByIdAndUpdate(
+//     req.user.id,
+//     {
+//       name: req.body.name,
+//       email: req.body.email,
+//     },
+//     { new: true, runValidators: true }
+//   );
+//   res.status(200).render('account', {
+//     title: 'Your account',
+//     user: updatedUser,
+//   });
+// });
+
+exports.searchUser = catchAsync(async (req, res, next) => {
+  const users = await User.find({
+    name: { $regex: req.params.key, $options: 'i' },
+    _id: { $ne: req.user._id },
+  });
+
+  res.status(200).render('userManagement', {
+    title: 'User Management',
+    users,
   });
 });
 
 exports.getUser = catchAsync(async (req, res, next) => {
-  const users = await User.find({ role: { $ne: 'admin' } });
+  const users = await User.find({ _id: { $ne: req.user._id } });
 
   res.status(200).render('userManagement', {
     title: 'User Management',
