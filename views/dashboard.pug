@@ -1,0 +1,46 @@
+extends base
+
+block content 
+  .dashboard
+    .dashboard-main
+      .headtitle
+        h2.heading-secondary DASHBOARD
+      .dashboard-container
+        .row.row-1
+          .col.col_orange
+            .col_info
+              i.fas.fa-donate.i-yellow
+              h3.card__sub-heading Sales
+              span#weekly-sales.statistic-data= `$${salesStats.totalSales}`
+          .col.col_pink
+            .col_info
+              i.fas.fa-coins.i-pink
+              h3.card__sub-heading Tours
+              span#montly-sales.statistic-data= salesStats.totalTours
+          .col.col_green
+            .col_info
+              i.fas.fa-search-location.i-green
+              h3.card__sub-heading Bookings
+              span.statistic-data= salesStats.totalBookings
+          .col.col_blue
+            .col_info
+              i.fas.fa-users.i-blue
+              h3.card__sub-heading Users 
+              span.statistic-data= salesStats.totalUsers
+        .row.row-2
+          .col.col_grey
+            .line-chart
+              h3.heading-secondary(style='margin-bottom: 1rem') Sales over last 6 months
+              canvas#my-chart
+              .bar-note
+                span
+                  i.fas.fa-circle.text-success
+                  |                   Monthly Sales
+          .col.col_grey
+            .pie-chart
+              h3.heading-secondary(style='margin-bottom: 1rem')
+                | Top-selling Tours
+              canvas(width='400', height='400' style='background-color: white;')#my-chart-2
+
+  
+    

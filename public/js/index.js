@@ -1,6 +1,7 @@
 import '@babel/polyfill';
 import { login, logout } from './login';
 import { displayMap } from './mapbox';
+import { displayChart } from './displayChart';
 import { updateSettings } from './updateSettings';
 import { bookTour } from './stripe';
 import { showAlert } from './alert';
@@ -8,9 +9,12 @@ import { signup } from './signup';
 import { createReview } from './createReview';
 import { addUser, deleteUser, updateUser } from './manipulateUser';
 import { manipulateTour, deleteTour } from './manipulateTour';
+import { deleteBooking } from './deleteBooking';
 
 // DOM ELEMENT
 const mapBox = document.getElementById('map');
+const chart1 = document.getElementById('my-chart');
+
 const loginForm = document.querySelector('#login');
 const signUpForm = document.querySelector('#signup');
 const logOutBtn = document.querySelector('.nav__el--logout');
@@ -277,7 +281,7 @@ if (addUserBtn) {
 }
 
 // Handle edit/delete user
-const userTable = document.querySelector('.user-management');
+const userTable = document.querySelector('#user-management');
 if (userTable)
   userTable.addEventListener('click', function (e) {
     const editBtn = e.target.closest('.edit-btn');
@@ -509,4 +513,27 @@ if (updateTourBtn) {
     form.append('locations', locations);
     manipulateTour(form, editTourId);
   });
+}
+
+///////////////////BOOKING///////////////////////////////
+const bookingsTable = document.querySelector('#booking');
+if (bookingsTable) {
+  bookingsTable.addEventListener('click', (e) => {
+    e.preventDefault();
+    const deleteBtn = e.target.closest('.delete-btn');
+    if (deleteBtn) {
+      const { bookingId } = deleteBtn.dataset;
+      confirmBox.classList.remove('hidden');
+      overlay.classList.remove('hidden');
+      const cancel = document.getElementById('cancel');
+      const confirm = document.getElementById('confirm');
+      cancel.addEventListener('click', () => toggleForm('hide'));
+      confirm.addEventListener('click', () => deleteBooking(bookingId));
+    }
+  });
+}
+
+////////////////////////DASHBOARD//////////////////////////
+if (chart1) {
+  displayChart();
 }

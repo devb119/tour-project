@@ -4,7 +4,7 @@ mixin navItem(link, text, icon, active)
   li(class=`${active ? 'side-nav--active' : ''}`)
     a(href=`${link}`)
       svg
-        use(xlink:href=`img/icons.svg#icon-${icon}`)
+        use(xlink:href=`/img/icons.svg#icon-${icon}`)
       | #{text}
 
 block content 
@@ -20,10 +20,11 @@ block content
           .admin-nav
             h5.admin-nav__heading Admin
             ul.side-nav
+              +navItem('/dashboard', 'Dashboard', 'bar-chart-2', false)
               +navItem('/tour-mng', 'Manage tours', 'map', false)
               +navItem('/user', 'Manage users', 'users', false)
               //- +navItem('#', 'Manage reviews', 'star', false)
-              +navItem('#', 'Manage bookings', 'briefcase', false)
+              +navItem('/booking', 'Manage bookings', 'briefcase', false)
 
       .user-view__content
         .user-view__form-container

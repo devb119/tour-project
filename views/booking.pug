@@ -1,0 +1,58 @@
+extends base
+
+mixin navItem(link, text, icon, active)
+  li(class=`${active ? 'side-nav--active' : ''}`)
+    a(href=`${link}`)
+      svg
+        use(xlink:href=`/img/icons.svg#icon-${icon}`)
+      | #{text}
+
+block content 
+  .overlay.hidden
+  include _confirm
+  main.main
+    .user-view
+      nav.user-view__menu
+        ul.side-nav
+          +navItem('/me', 'Settings', 'settings', false)
+          +navItem('/my-tours', 'My bookings', 'briefcase', false)
+          //- +navItem('#', 'My reviews', 'star', false)
+          //- +navItem('#', 'Billing', 'credit-card', false)
+        - if(user.role === 'admin')
+          .admin-nav
+            h5.admin-nav__heading Admin
+            ul.side-nav
+              +navItem('/dashboard', 'Dashboard', 'bar-chart-2', false)
+              +navItem('/tour-mng', 'Manage tours', 'map', false)
+              +navItem('/user', 'Manage users', 'users', false)
+              //- +navItem('#', 'Manage reviews', 'star', false)
+              +navItem('#', 'Manage bookings', 'briefcase', true)
+
+      .user-view__content
+        .management__form
+          .table-header
+            h2.heading-secondary Booking Management
+          #booking.user-management
+            table.table
+              thead
+                tr
+                  th.table__label ID
+                  th.table__label Tour Name
+                  th.table__label User
+                  th.table__label Price
+                  th.table__label Booking Date
+                  th.table__label Actions
+              tbody
+                each booking in bookings
+                  tr
+                    td= `${String(booking._id).slice(20)}`
+                    td
+                      img(src=`/img/tours/${booking.tour.imageCover}`)
+                      span#booking-tour-name= booking.tour.name
+                    td
+                      span.user-name= booking.user.name
+                    td= booking.price
+                    td= `${String(booking.createdAt).split('T')[0]}`
+                    td
+                      button.delete-btn(data-booking-id=`${booking._id}`)
+                        i.fas.fa-minus

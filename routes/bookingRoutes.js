@@ -14,6 +14,8 @@ router.get(
 
 router.use(authController.restrictTo('admin', 'lead-guide'));
 
+router.get('/stats', bookingController.getBookingStats);
+
 router
   .route('/')
   .get(bookingController.getAllBookings)

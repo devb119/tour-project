@@ -31,6 +31,13 @@ router.get('/me', authController.protect, viewsController.getAccount);
 router.get('/my-tours', authController.protect, viewsController.getMyTours);
 
 router.get(
+  '/dashboard',
+  authController.protect,
+  authController.restrictTo('admin'),
+  viewsController.getDashboard
+);
+
+router.get(
   '/user',
   authController.protect,
   authController.restrictTo('admin'),
@@ -51,6 +58,12 @@ router.get(
   viewsController.updateTour
 );
 
+router.get(
+  '/booking',
+  authController.protect,
+  authController.restrictTo('admin'),
+  viewsController.getBooking
+);
 // Old way to update via form
 // router.post(
 //   '/submit-user-data',

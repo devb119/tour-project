@@ -24,10 +24,11 @@ block content
           .admin-nav
             h5.admin-nav__heading Admin
             ul.side-nav
+              +navItem('/dashboard', 'Dashboard', 'bar-chart-2', false)
               +navItem('/tour-mng', 'Manage tours', 'map', false)
               +navItem('/user', 'Manage users', 'users', true)
               //- +navItem('#', 'Manage reviews', 'star', false)
-              +navItem('#', 'Manage bookings', 'briefcase', false)
+              +navItem('/booking', 'Manage bookings', 'briefcase', false)
 
       .user-view__content
         .management__form

@@ -110,6 +110,34 @@ exports.getMyTours = catchAsync(async (req, res, next) => {
 //   });
 // });
 
+exports.getDashboard = catchAsync(async (req, res, next) => {
+  const tours = await Tour.find();
+  const users = await User.find();
+  const bookingStats = await Booking.aggregate([
+    {
+      $group: {
+        _id: null,
+        totalSales: { $sum: '$price' },
+        totalBookings: { $sum: 1 },
+      },
+    },
+  ]);
+
+  const salesStats = {
+    totalTours: tours.length,
+    totalUsers: users.length,
+    totalSales: bookingStats[0].totalSales,
+    totalBookings: bookingStats[0].totalBookings,
+  };
+
+  console.log(salesStats);
+
+  res.status(200).render('dashboard', {
+    title: 'Dashboard',
+    salesStats,
+  });
+});
+
 exports.searchUser = catchAsync(async (req, res, next) => {
   const users = await User.find({
     name: { $regex: req.params.key, $options: 'i' },
@@ -142,5 +170,13 @@ exports.updateTour = catchAsync(async (req, res, next) => {
     tours,
     users,
     update: true,
+  });
+});
+
+exports.getBooking = catchAsync(async (req, res, next) => {
+  const bookings = await Booking.find();
+  res.status(200).render('booking', {
+    title: 'Booking',
+    bookings,
   });
 });

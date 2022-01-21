@@ -90,3 +90,71 @@ exports.getBooking = factory.getOne(Booking);
 exports.createBooking = factory.createOne(Booking);
 exports.updateBooking = factory.updateOne(Booking);
 exports.deleteBooking = factory.deleteOne(Booking);
+
+exports.getBookingStats = catchAsync(async (req, res, next) => {
+  const back6months = new Date(Date.now() - 6 * 30 * 24 * 60 * 60 * 1000);
+  const back6monthsString = `${back6months.getFullYear()}-${back6months.getMonth()}-${back6months.getDate()}`;
+  console.log(back6monthsString);
+  let stats = await Booking.aggregate([
+    {
+      $match: {
+        createdAt: {
+          $gte: new Date(back6monthsString),
+        },
+      },
+    },
+    {
+      $group: {
+        _id: { $month: '$createdAt' },
+        sales: { $sum: '$price' },
+        year: { $push: '$createdAt' },
+      },
+    },
+    {
+      $sort: { _id: 1 },
+    },
+  ]);
+
+  stats = stats.map((el) => {
+    el.year = new Date(el.year[0]).getFullYear();
+    return el;
+  });
+
+  const thisYear = stats.filter(
+    (el) => el.year === new Date(Date.now()).getFullYear()
+  );
+
+  const lastYear = stats.filter(
+    (el) => el.year === new Date(Date.now()).getFullYear() - 1
+  );
+
+  let topTour = await Booking.aggregate([
+    {
+      $group: {
+        _id: '$tour',
+        bookingTimes: { $sum: 1 },
+      },
+    },
+    {
+      $sort: { bookingTimes: -1 },
+    },
+    {
+      $limit: 6,
+    },
+  ]);
+
+  const topTourName = await Promise.all(
+    topTour.map(async (el) => {
+      el._id = await Tour.findById(el._id);
+      return el;
+    })
+  );
+  res.status(200).json({
+    status: 'success',
+    data: {
+      thisYear,
+      lastYear,
+      topTour,
+    },
+  });
+});
