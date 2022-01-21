@@ -9017,7 +9017,7 @@ var displayChart = /*#__PURE__*/function () {
                 labels: tourNames,
                 datasets: [{
                   data: bookingTimes,
-                  backgroundColor: ['rgba(139, 218, 143, 0.8)', 'rgba(255, 139, 139, 0.8)', 'rgba(139, 218, 255, 0.8)', 'rgba(255, 209, 139, 0.8)', 'rgba(151, 151, 151, 0.5)', 'rgba(255, 158, 129, 0.5)'],
+                  backgroundColor: ['rgba(139, 218, 143, 1)', 'rgba(255, 139, 139, 1)', 'rgba(139, 218, 255, 1)', 'rgba(255, 209, 139, 1)', 'rgba(151, 151, 151, 1)', 'rgba(255, 158, 129, 1)'],
                   fill: true
                 }]
               },

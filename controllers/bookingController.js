@@ -94,7 +94,6 @@ exports.deleteBooking = factory.deleteOne(Booking);
 exports.getBookingStats = catchAsync(async (req, res, next) => {
   const back6months = new Date(Date.now() - 6 * 30 * 24 * 60 * 60 * 1000);
   const back6monthsString = `${back6months.getFullYear()}-${back6months.getMonth()}-${back6months.getDate()}`;
-  console.log(back6monthsString);
   let stats = await Booking.aggregate([
     {
       $match: {

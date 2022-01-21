@@ -130,8 +130,6 @@ exports.getDashboard = catchAsync(async (req, res, next) => {
     totalBookings: bookingStats[0].totalBookings,
   };
 
-  console.log(salesStats);
-
   res.status(200).render('dashboard', {
     title: 'Dashboard',
     salesStats,
