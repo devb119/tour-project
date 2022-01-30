@@ -11,11 +11,12 @@ Built using modern technologies: node.js, express, mongoDB, mongoose
 - Install node.js
 
 - Create file with name config.env and these content:
-  NODE_ENV=development
-  PORT=3000
-  USER=ducanh
-  DATABASE=<YOUR CLOUD MONGODB CONNECTION STRING>
-  DATABASE_PASSWORD=<YOUR DB PASSWORD>
+
+NODE_ENV=development
+PORT=3000
+USER=ducanh
+DATABASE=<YOUR CLOUD MONGODB CONNECTION STRING>
+DATABASE_PASSWORD=<YOUR DB PASSWORD>
 
 JWT_SECRET=this-is-the-dumpest-secret-code-in-the-world
 JWT_EXPIRES_IN=90d
