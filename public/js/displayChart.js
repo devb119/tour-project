@@ -23,7 +23,6 @@ export const displayChart = async () => {
     tourNames.push(el._id.name);
     bookingTimes.push(el.bookingTimes);
   });
-  console.log(tourNames, bookingTimes);
 
   const myChart = new Chart(chart1, {
     type: 'line',

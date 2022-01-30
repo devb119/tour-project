@@ -48,6 +48,7 @@ exports.createBookingCheckout = catchAsync(async (req, res, next) => {
     user,
     price,
   });
+  console.log('Creating');
   // Hide sensitive data
   res.redirect(`${req.originalUrl.split('?')[0]}?alert=booking`);
 });

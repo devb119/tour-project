@@ -188,19 +188,22 @@ if (cardContainer) {
         '#locationCoordinate1'
       ).value = `${tour.locations[0].coordinates[0]}, ${tour.locations[0].coordinates[1]}`;
       tourForm.querySelector('#locationDescription1').value =
-        tour.locations[1].description;
+        tour.locations[0].description;
+      tourForm.querySelector('#day1').value = tour.locations[0].day;
       tourForm.querySelector(
         '#locationCoordinate2'
       ).value = `${tour.locations[1].coordinates[0]}, ${tour.locations[1].coordinates[1]}`;
 
       tourForm.querySelector('#locationDescription2').value =
-        tour.locations[2].description;
+        tour.locations[1].description;
+      tourForm.querySelector('#day2').value = tour.locations[1].day;
       tourForm.querySelector(
         '#locationCoordinate3'
       ).value = `${tour.locations[2].coordinates[0]}, ${tour.locations[2].coordinates[1]}`;
 
       tourForm.querySelector('#locationDescription3').value =
         tour.locations[2].description;
+      tourForm.querySelector('#day3').value = tour.locations[2].day;
 
       overlay.classList.remove('hidden');
       tourForm.classList.remove('hidden');
@@ -359,10 +362,13 @@ if (showAddFormBtn) {
       tourForm.querySelector('#guide3').value = '';
       tourForm.querySelector('#locationCoordinate1').value = '';
       tourForm.querySelector('#locationDescription1').value = '';
+      tourForm.querySelector('#day1').value = '';
       tourForm.querySelector('#locationCoordinate2').value = '';
       tourForm.querySelector('#locationDescription2').value = '';
+      tourForm.querySelector('#day2').value = '';
       tourForm.querySelector('#locationCoordinate3').value = '';
       tourForm.querySelector('#locationDescription3').value = '';
+      tourForm.querySelector('#day3').value = '';
     }
   });
 }
@@ -419,6 +425,7 @@ if (addTourBtn) {
         coordinates: tourForm
           .querySelector('#locationCoordinate1')
           .value.split(','),
+        day: tourForm.querySelector('#day1').value,
       },
       {
         description: tourForm.querySelector('#locationDescription2').value,
@@ -426,6 +433,7 @@ if (addTourBtn) {
         coordinates: tourForm
           .querySelector('#locationCoordinate2')
           .value.split(','),
+        day: tourForm.querySelector('#day2').value,
       },
       {
         description: tourForm.querySelector('#locationDescription3').value,
@@ -433,6 +441,7 @@ if (addTourBtn) {
         coordinates: tourForm
           .querySelector('#locationCoordinate3')
           .value.split(','),
+        day: tourForm.querySelector('#day3').value,
       },
     ]);
     form.append('startLocation', startLocation);
@@ -493,6 +502,7 @@ if (updateTourBtn) {
         coordinates: tourForm
           .querySelector('#locationCoordinate1')
           .value.split(','),
+        day: tourForm.querySelector('#day1').value,
       },
       {
         description: tourForm.querySelector('#locationDescription2').value,
@@ -500,6 +510,7 @@ if (updateTourBtn) {
         coordinates: tourForm
           .querySelector('#locationCoordinate2')
           .value.split(','),
+        day: tourForm.querySelector('#day2').value,
       },
       {
         description: tourForm.querySelector('#locationDescription3').value,
@@ -507,6 +518,7 @@ if (updateTourBtn) {
         coordinates: tourForm
           .querySelector('#locationCoordinate3')
           .value.split(','),
+        day: tourForm.querySelector('#day3').value,
       },
     ]);
     form.append('startLocation', startLocation);

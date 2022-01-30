@@ -8963,7 +8963,6 @@ var displayChart = /*#__PURE__*/function () {
               tourNames.push(el._id.name);
               bookingTimes.push(el.bookingTimes);
             });
-            console.log(tourNames, bookingTimes);
             myChart = new Chart(chart1, {
               type: 'line',
               data: {
@@ -9039,7 +9038,7 @@ var displayChart = /*#__PURE__*/function () {
               }
             });
 
-          case 20:
+          case 19:
           case "end":
             return _context.stop();
         }
@@ -10162,11 +10161,14 @@ if (cardContainer) {
       tourForm.querySelector('#startAddress').value = tour.startLocation.address;
       tourForm.querySelector('#startDescription').value = tour.startLocation.description;
       tourForm.querySelector('#locationCoordinate1').value = "".concat(tour.locations[0].coordinates[0], ", ").concat(tour.locations[0].coordinates[1]);
-      tourForm.querySelector('#locationDescription1').value = tour.locations[1].description;
+      tourForm.querySelector('#locationDescription1').value = tour.locations[0].description;
+      tourForm.querySelector('#day1').value = tour.locations[0].day;
       tourForm.querySelector('#locationCoordinate2').value = "".concat(tour.locations[1].coordinates[0], ", ").concat(tour.locations[1].coordinates[1]);
-      tourForm.querySelector('#locationDescription2').value = tour.locations[2].description;
+      tourForm.querySelector('#locationDescription2').value = tour.locations[1].description;
+      tourForm.querySelector('#day2').value = tour.locations[1].day;
       tourForm.querySelector('#locationCoordinate3').value = "".concat(tour.locations[2].coordinates[0], ", ").concat(tour.locations[2].coordinates[1]);
       tourForm.querySelector('#locationDescription3').value = tour.locations[2].description;
+      tourForm.querySelector('#day3').value = tour.locations[2].day;
       overlay.classList.remove('hidden');
       tourForm.classList.remove('hidden');
     }
@@ -10405,10 +10407,13 @@ if (showAddFormBtn) {
       tourForm.querySelector('#guide3').value = '';
       tourForm.querySelector('#locationCoordinate1').value = '';
       tourForm.querySelector('#locationDescription1').value = '';
+      tourForm.querySelector('#day1').value = '';
       tourForm.querySelector('#locationCoordinate2').value = '';
       tourForm.querySelector('#locationDescription2').value = '';
+      tourForm.querySelector('#day2').value = '';
       tourForm.querySelector('#locationCoordinate3').value = '';
       tourForm.querySelector('#locationDescription3').value = '';
+      tourForm.querySelector('#day3').value = '';
     }
   });
 }
@@ -10455,15 +10460,18 @@ if (addTourBtn) {
               locations = JSON.stringify([{
                 description: tourForm.querySelector('#locationDescription1').value,
                 type: 'Point',
-                coordinates: tourForm.querySelector('#locationCoordinate1').value.split(',')
+                coordinates: tourForm.querySelector('#locationCoordinate1').value.split(','),
+                day: tourForm.querySelector('#day1').value
               }, {
                 description: tourForm.querySelector('#locationDescription2').value,
                 type: 'Point',
-                coordinates: tourForm.querySelector('#locationCoordinate2').value.split(',')
+                coordinates: tourForm.querySelector('#locationCoordinate2').value.split(','),
+                day: tourForm.querySelector('#day2').value
               }, {
                 description: tourForm.querySelector('#locationDescription3').value,
                 type: 'Point',
-                coordinates: tourForm.querySelector('#locationCoordinate3').value.split(',')
+                coordinates: tourForm.querySelector('#locationCoordinate3').value.split(','),
+                day: tourForm.querySelector('#day3').value
               }]);
               form.append('startLocation', startLocation);
               form.append('locations', locations);
@@ -10519,15 +10527,18 @@ if (updateTourBtn) {
     var locations = JSON.stringify([{
       description: tourForm.querySelector('#locationDescription1').value,
       type: 'Point',
-      coordinates: tourForm.querySelector('#locationCoordinate1').value.split(',')
+      coordinates: tourForm.querySelector('#locationCoordinate1').value.split(','),
+      day: tourForm.querySelector('#day1').value
     }, {
       description: tourForm.querySelector('#locationDescription2').value,
       type: 'Point',
-      coordinates: tourForm.querySelector('#locationCoordinate2').value.split(',')
+      coordinates: tourForm.querySelector('#locationCoordinate2').value.split(','),
+      day: tourForm.querySelector('#day2').value
     }, {
       description: tourForm.querySelector('#locationDescription3').value,
       type: 'Point',
-      coordinates: tourForm.querySelector('#locationCoordinate3').value.split(',')
+      coordinates: tourForm.querySelector('#locationCoordinate3').value.split(','),
+      day: tourForm.querySelector('#day3').value
     }]);
     form.append('startLocation', startLocation);
     form.append('locations', locations);
@@ -10591,7 +10602,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "64789" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "53946" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

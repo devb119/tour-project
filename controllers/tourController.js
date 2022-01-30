@@ -91,7 +91,7 @@ exports.formatData = catchAsync(async (req, res, next) => {
   req.body.startDates = JSON.parse(req.body.startDates);
   req.body.startLocation = JSON.parse(req.body.startLocation);
   req.body.locations = JSON.parse(req.body.locations);
-  if (req.method === 'PUSH') {
+  if (req.method === 'POST') {
     req.body.locations[0]._id = `${ObjectId()}`;
     req.body.locations[1]._id = `${ObjectId()}`;
     req.body.locations[2]._id = `${ObjectId()}`;
