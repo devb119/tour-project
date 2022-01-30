@@ -9,7 +9,6 @@ Built using modern technologies: node.js, express, mongoDB, mongoose
   PORT=3000
   USER=ducanh
   DATABASE=<YOUR CLOUD MONGODB CONNECTION STRING>
-  DATABASE_LOCAL=<YOUR LOCAL CONNECTION STRING>
   DATABASE_PASSWORD=<YOUR DB PASSWORD>
 
 JWT_SECRET=this-is-the-dumpest-secret-code-in-the-world
