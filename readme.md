@@ -2,7 +2,13 @@
 
 Built using modern technologies: node.js, express, mongoDB, mongoose
 
+## Requirements
+
+- node.js > v14
+
 ## How to run the project
+
+- Install node.js
 
 - Create file with name config.env and these content:
   NODE_ENV=development
@@ -35,7 +41,7 @@ STRIPE_WEBHOOK_SECRET=whsec_dq7SCpvD7Nx4X5nby69KkyVgkJKcPnUn
 3. npm run dev
 4. Now, open http://127.0.0.1:3000 to see the result
 
-## Import data:
+## Import data
 
 - Open terminal and run these script if your database doesn't have data yet
 
